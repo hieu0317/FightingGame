@@ -56,6 +56,9 @@ namespace LoanDau.Game
         {
             public SpriteRenderer r;
             public Sprite[] frames;
+            public SpriteClip hitClip;
+            public int target;
+            public int heightPx;
             public float t0, dur, scale, vx, vy, gravity, spin;
             public Vector3 pos;
             public bool text;
@@ -420,25 +423,35 @@ namespace LoanDau.Game
                         need = e.kind == EffectKind.Explosion ? 1 : Mathf.Clamp(Mathf.CeilToInt(s.halfW * 2 / spriteW), 1, 24);
                     }
                 }
+                int impactTick = e.age - e.scaffoldImpactAge;
+                bool collapsing = e.active && e.scaffoldImpactAge > 0 && fx && fx.scaffoldBreak.Length > 0;
+                if (collapsing && impactTick < 22 && fx.scaffoldContact.Length > 0) need = 2;
                 while (views.Count < need) views.Add(NewRenderer($"Effect_{i}_{views.Count}", null, 15));
                 for (int k = 0; k < views.Count; k++)
                 {
                     var r = views[k];
                     r.enabled = k < need;
                     if (!r.enabled) continue;
+                    r.sortingOrder = collapsing && k == 1 ? 16 : 15;
                     if(worldSkill != null && worldSkill.worldObject && !e.field) {
-                        // giàn giáo chạm đất: diễn scaffold_contact rồi scaffold_break trong phần đời còn lại của hiệu ứng
-                        var hit = ScaffoldImpactFrame(worldSkill, e);
-                        if(hit) {
-                            r.sprite=hit;
-                            r.transform.localScale=Vector3.one*(s.halfW*2f/hit.rect.width);
-                            r.transform.position=ToWorld(e.x,e.y-s.halfH*FightSim.Sub);   // pivot ở đáy ảnh
-                            r.flipX=e.vx<0; r.color=Color.white;
+                        if (collapsing) {
+                            bool dust = k == 1;
+                            var sequence = dust ? fx.scaffoldContact : fx.scaffoldBreak;
+                            int index = dust ? impactTick * sequence.Length / 22
+                                : impactTick * sequence.Length / Mathf.Max(1, e.lifetime - e.scaffoldImpactAge);
+                            r.sprite = sequence[Mathf.Min(index, sequence.Length - 1)];
+                            r.transform.localScale = Vector3.one * (2f * s.halfH / worldSkill.worldObject.rect.height);
+                            r.transform.position = dust ? ToWorld(e.scaffoldImpactX, e.scaffoldImpactY)
+                                : ToWorld(e.x, e.y - s.halfH * FightSim.Sub);
+                            r.flipX = false;
+                            r.color = Color.white;
                             continue;
                         }
                         r.sprite=worldSkill.worldObject;
                         float w=worldSkill.dropsFromAbove ? s.halfW*2f : Mathf.Clamp(s.halfW*2f,12,80);
                         r.transform.localScale=Vector3.one*(w/r.sprite.rect.width);
+                        if (worldSkill.dropsFromAbove && r.sprite.name == "scaffold")
+                            r.transform.localScale = Vector3.one * (2f * s.halfH / r.sprite.rect.height);
                         r.transform.position=ToWorld(e.x,e.y)-Vector3.Scale(r.sprite.bounds.center,r.transform.localScale);
                         r.flipX=e.vx<0; r.color=Color.white;
                         continue;
@@ -458,19 +471,6 @@ namespace LoanDau.Game
             }
         }
 
-        /// <summary>Frame va chạm của giàn giáo (CombatFX/scaffold_impact); null khi đang rơi hoặc không phải giàn giáo.</summary>
-        Sprite ScaffoldImpactFrame(SkillData skill, in EffectState e)
-        {
-            const int FallTicks = 12;                                  // FightSim.StepEffects: vật rơi 12 tick rồi chạm đất
-            if (!skill.dropsFromAbove || skill.worldObject.name != "scaffold" || fx == null) return null;
-            int c = fx.scaffoldContact.Length, b = fx.scaffoldBreak.Length;
-            int landed = e.age - FallTicks;
-            if (landed < 0 || c + b == 0) return null;
-            int per = Mathf.Max(1, (e.lifetime - FallTicks) / (c + b));
-            int n = landed / per;
-            if (n < c) return fx.scaffoldContact[n];
-            return b > 0 ? fx.scaffoldBreak[Mathf.Min(b - 1, n - c)] : fx.scaffoldContact[c - 1];
-        }
 
         // ------------------------------------------------------------------ mối nguy môi trường (Hazards/<stage>/hazard.png)
         void BuildHazardViews(StageData stage, bool preview)
@@ -612,10 +612,18 @@ namespace LoanDau.Game
             var up = Vector3.up;
             switch (ev.kind)
             {
-                case SimEventKind.HitLight: Anim(fx.sparkLight, pos, 0.45f, 0.18f); break;
+                case SimEventKind.DoubleJump: Anim(fx.shockRing, pos, 0.38f, 0.16f, new Color(0.75f, 0.9f, 1f)); break;
+                case SimEventKind.HitLight:
                 case SimEventKind.HitHeavy:
-                    Anim(fx.sparkHeavy, pos, 0.6f, 0.25f);
-                    Text(fx.bop, pos + up * 0.45f, 0.55f);
+                    bool heavy = ev.kind == SimEventKind.HitHeavy;
+                    bool special = false;
+                    if ((ev.hitFlags & HitFlags.Fire) != 0) special |= HitVfx(fx.fireHit, ev.actor, 35);
+                    if ((ev.hitFlags & HitFlags.Electric) != 0) special |= HitVfx(fx.electricHit, ev.actor, 48);
+                    if ((ev.hitFlags & HitFlags.Launch) != 0) special |= HitVfx(fx.launchHit, ev.actor, 28);
+                    if ((ev.hitFlags & HitFlags.Stun) != 0 && ev.actor >= 0)
+                        special |= HitVfx(fx.stunStars, ev.actor, sim.Fighters[ev.actor].hurtHeight + 12);
+                    if (!special) Anim(heavy ? fx.sparkHeavy : fx.sparkLight, pos, heavy ? 0.6f : 0.45f, heavy ? 0.25f : 0.18f);
+                    if (heavy) Text(fx.bop, pos + up * 0.45f, 0.55f);
                     break;
                 case SimEventKind.Block: Anim(fx.sparkLight, pos, 0.35f, 0.15f, new Color(0.6f, 0.8f, 1f)); break;
                 case SimEventKind.GuardBreak: Anim(fx.shockRing, pos, 0.7f, 0.3f, new Color(0.7f, 0.85f, 1f)); break;
@@ -641,6 +649,19 @@ namespace LoanDau.Game
                 case SimEventKind.Land: Anim(fx.landingDust, pos, 0.35f, 0.25f); break;
                 case SimEventKind.Knockdown: Anim(fx.landingDust, pos, 0.6f, 0.3f); break;
             }
+        }
+
+        bool HitVfx(SpriteClip clip, int target, int heightPx)
+        {
+            if (target < 0 || !MoveSet.Ok(clip)) return false;
+            // Đòn liên hoàn làm mới cùng hiệu ứng trên cùng người.
+            var v = vfx.Find(item => item.hitClip == clip && item.target == target);
+            if (v == null) v = Make(clip.frames, Vector3.zero, 1f, clip.lengthTicks / (float)FightSim.TickRate);
+            v.hitClip = clip;
+            v.target = target;
+            v.heightPx = heightPx;
+            v.t0 = Time.time;
+            return true;
         }
 
         Vfx Make(Sprite[] frames, Vector3 pos, float scale, float dur)
@@ -680,8 +701,14 @@ namespace LoanDau.Game
                     continue;
                 }
                 float dt = now - v.t0;
-                v.r.sprite = v.frames[Mathf.Min(v.frames.Length - 1, (int)(k * v.frames.Length))];
+                v.r.sprite = v.hitClip != null ? v.hitClip.FrameAt((int)(dt * FightSim.TickRate))
+                    : v.frames[Mathf.Min(v.frames.Length - 1, (int)(k * v.frames.Length))];
                 var p = v.pos + new Vector3(v.vx * dt, v.vy * dt - 0.5f * v.gravity * dt * dt, 0);
+                if (v.hitClip != null)
+                {
+                    ref var fighter = ref sim.Fighter(v.target);
+                    p = ToWorld(fighter.x, fighter.y + v.heightPx * FightSim.Sub);
+                }
                 v.r.transform.position = new Vector3(Mathf.Round(p.x * Ppu) / Ppu, Mathf.Round(p.y * Ppu) / Ppu, 0);
                 v.r.transform.rotation = Quaternion.Euler(0, 0, v.spin * dt);
                 // chữ truyện tranh: bật to rồi thu lại (Asset Bible mục 7)

@@ -15,7 +15,7 @@ những gì spec đó chưa có (kỹ năng khi đang bay, âm thanh, stage).
 | C | Kỹ năng tung khi đang bay | Linh, Mai, Khang, Bà Tư, Bảo | 5 sheet `cast_*.png` (= 48 clip) | Trung bình | ✅ đã giao, engine đã dùng |
 | D | Âm thanh còn thiếu (SFX chiêu, vung đòn, UI, còi xe…) | – | ~90 file | Trung bình | ✅ phần lớn đã giao và dùng; **còn thiếu** xướng trận (mục 5.4) và tiếng gồng nộ |
 | E | Thoại thu âm thật | 6 nhân vật | 42 câu | Thấp (trước phát hành) | ❌ chưa có – vẫn giọng đọc máy |
-| F | Stage: bệ nhảy, lớp tiền cảnh, mưa | 4 stage | xem mục 6 | Thấp | ⚠️ double jump + bệ đã có trong code; **cần vẽ lại 3 nền** cho bệ thấp xuống + clip `double_jump` – mục 6.2 |
+| F | Stage: bệ nhảy, lớp tiền cảnh, mưa | 4 stage | xem mục 6 | Thấp | ✅ double jump + bệ một chiều; 3 nền đã vẽ lại bệ thấp, clip + SFX `double_jump` đã có – mục 6 |
 | G | Sprite vật hư hỏng cỡ nhỏ | 12 vật | 12 ảnh | Thấp | ✅ đã giao, engine đã dùng |
 | H | Gồng nộ (`rage_charge_*` + hào quang) | 6 nhân vật | 3 clip + 3 FX / người | – | ✅ asset bổ sung ngoài spec, engine đã dùng (giữ Đỡ + Kỹ năng) |
 
@@ -178,11 +178,12 @@ Hiện là giọng đọc máy để canh nhịp. Engine đang gán (đổi đư
 - Tầm nhảy (px trên mặt sàn): Bảo 57 / 115 · Bà Tư 64 / 128 · Long, Khang, Mai 71 / 142 · Linh 87 / 173 (1 lần / 2 lần).
   → Bệ đặt **≤ 105 px**: nhảy 1 lần không tới, nhảy 2 lần thì cả 6 người tới được.
 
-**Tạm thời:** bệ vẽ trên nền đang cao 123–340 px (không ai tới được), nên builder hạ bệ xuống mức ở bảng dưới và
-**vẽ thêm sprite bệ ở chỗ mới** → hiện trên màn hình mỗi bệ thấy 2 lần (bản cũ trên nền + bản mới đứng được).
-Hết trùng khi giao nền vẽ lại (mục 6.2).
+**Đã xong (27/11/2026):** 3 nền đã vẽ lại với bệ ở độ cao mới (bảng mục 6.2), `stage-platforms.json` khớp nền →
+builder dùng thẳng độ cao trên nền, không còn vẽ sprite bệ thừa. Clip `double_jump` (6 frame × 3 tick) cho cả 6 nhân vật,
+`SFX/double_jump.wav` và `SFX/rage_charge.wav` (phát khi vào thế gồng nộ) đã nạp.
+Cơ chế tự hạ bệ trong builder vẫn giữ làm lưới an toàn: nếu sau này nền mới có bệ thấp nhất > 105 px thì nó lại hạ tạm + cảnh báo.
 
-### 6.2 Sprite cần vẽ / sửa
+### 6.2 Sprite cần vẽ / sửa (đã giao đủ – giữ làm quy chuẩn khi sửa nền sau này)
 
 **Bắt buộc – vẽ lại 3 ảnh nền** `Stages/<stage>.png` (768 × 432, mặt sàn ở dòng y = 372 tính từ trên xuống): dời bệ xuống
 đúng độ cao mới, xoá bệ ở chỗ cũ (vẽ lại tường / trời phía sau cho liền). Mặt bệ phải là **một đường ngang phẳng**,
@@ -208,7 +209,7 @@ Hết trùng khi giao nền vẽ lại (mục 6.2).
 Sau khi có nền mới: sửa toạ độ trong `Tools/build_stage_layers.py` → chạy lại script (sinh `StageModules` + `stage-platforms.json`)
 → Unity: **Dựng dữ liệu + scene**. Builder tự nhận bệ ≤ 105 px là "đã nằm đúng trên nền" và thôi vẽ sprite bệ thừa.
 
-**Nên có – clip nhảy lần 2** `BasicActions/<nv>/double_jump.png` + `.anim`, cả 6 nhân vật (hiện dùng lại `jump_start`):
+**✅ Clip nhảy lần 2** `BasicActions/<nv>/double_jump.png` + `.anim`, cả 6 nhân vật (chưa có thì engine dùng lại `jump_start`):
 
 | | |
 |---|---|
@@ -218,7 +219,7 @@ Sau khi có nền mới: sửa toạ độ trong `Tools/build_stage_layers.py` �
 | Lưu ý | không vẽ bụi / vệt gió dính vào người; chân thấp nhất vẫn ở dòng 160 |
 | Thời gian | thêm `"double_jump"` vào `ArtSource/PixelPack/basic-timings.json` |
 
-**Tuỳ chọn:** tiếng nhảy lần 2 `Audio/PixelPack/SFX/double_jump.wav` (hiện mượn `whoosh_light1`).
+**✅ Tiếng nhảy lần 2** `Audio/PixelPack/SFX/double_jump.wav` (thiếu thì mượn `whoosh_light1`) và tiếng gồng nộ `SFX/rage_charge.wav`.
 
 `drop_shadow.png` (Công Trường) chưa dùng: `hazard.png` đã vẽ sẵn bóng trong cả 8 frame, thêm nữa sẽ thành 2 bóng.
 
@@ -241,6 +242,10 @@ Sau khi có nền mới: sửa toạ độ trong `Tools/build_stage_layers.py` �
 - **Đợt giao 27/11/2026**: combo nối liền + đòn mạnh, đòn trên không Long/Bảo/Bà Tư, kỹ năng khi bay 5 nhân vật, SFX chiêu /
   vung đòn / đỡ / tiếp đất / ném / UI / mối nguy / mưa, vật hư hỏng cỡ nhỏ, biển báo xe máy 2 frame,
   giàn giáo chạm đất + đổ sụp (`CombatFX/scaffold_impact`), gồng nộ + hào quang 6 nhân vật.
+- **VFX trúng đòn theo thuộc tính** (`CombatFX/skill_hit`, `FxLibrary.fireHit / electricHit / launchHit / stunStars`):
+  đòn có cờ Lửa / Điện / Hất tung / Choáng hiện hiệu ứng riêng bám theo người dính đòn (thay tia lửa thường, đòn liên hoàn
+  làm mới hiệu ứng thay vì chồng thêm). Giàn giáo (Sập Giàn Giáo) chạm đúng mặt vật / sàn mới diễn bụi chạm đất + đổ sụp.
+  Nhảy lần 2 có vòng sóng nhỏ dưới chân (`shock_ring`).
 
 ## 9. Nhập asset và kiểm tra
 

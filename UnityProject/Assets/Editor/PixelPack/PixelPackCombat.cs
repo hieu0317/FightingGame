@@ -392,6 +392,17 @@ namespace LoanDau.EditorTools
             lib.landingDust = Seq("landing_dust");
             lib.smoke = Seq("smoke");
             lib.shockRing = Seq("shock_ring");
+            SpriteClip HitClip(string name)
+            {
+                var clip = PixelPackBuilder.ClipFromAnim($"Assets/Art/PixelPack/CombatFX/skill_hit/{name}.anim", false);
+                // Các strip dùng key giữ hình cuối ở tick kết thúc trừ một.
+                if (clip != null) clip.lengthTicks = clip.startTicks[^1] + 1;
+                return clip;
+            }
+            lib.electricHit = HitClip("electric_hit");
+            lib.fireHit = HitClip("fire_hit");
+            lib.launchHit = HitClip("launch_hit");
+            lib.stunStars = HitClip("stun_stars");
             lib.bop = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/PixelPack/CombatFX/bop.png");
             lib.rac = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/PixelPack/CombatFX/rac.png");
             // dải frame một ảnh (scaffold_impact/*.png): xếp theo vị trí trên ảnh

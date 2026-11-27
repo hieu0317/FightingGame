@@ -18,6 +18,7 @@ namespace LoanDau.Data
         public Sprite[] landingDust = Array.Empty<Sprite>();
         public Sprite[] smoke = Array.Empty<Sprite>();
         public Sprite[] shockRing = Array.Empty<Sprite>();
+        public SpriteClip electricHit, fireHit, launchHit, stunStars;
         public Sprite bop;   // chữ "BỐP!" – đòn mạnh
         public Sprite rac;   // chữ "RẮC!" – vật vỡ
         public Sprite[] scaffoldContact = Array.Empty<Sprite>();   // giàn giáo (Sập Giàn Giáo) chạm đất

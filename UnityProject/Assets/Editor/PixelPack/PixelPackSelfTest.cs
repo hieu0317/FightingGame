@@ -214,20 +214,25 @@ namespace LoanDau.EditorTools
                 string why = PlatformCheck(fighters, stages[0]);
                 Check(why == null, "Double jump + bệ một chiều: nhảy 2 lần lên bệ, ↓ + nhảy xuống, đi ra mép thì rơi" + (why == null ? "" : " – " + why));
             }
+            Check(fighters.All(f => MoveSet.Ok(f.moves?.doubleJump)), "6 nhân vật có clip double_jump (BasicActions/<nv>/double_jump)");
             foreach (var s in stages.Where(x => x.id != "bep"))
                 Check(s.platforms.Length > 0 && s.platforms.Min(p => p.topPx) <= PixelPackBuilder.PlatformReachPx
                       && s.platforms.Max(p => p.topPx) <= PixelPackBuilder.PlatformLoweredMaxPx,
                       $"{s.id}: {s.platforms.Length} bệ, cao " + (s.platforms.Length > 0 ? $"{s.platforms.Min(p => p.topPx)}–{s.platforms.Max(p => p.topPx)} px" : "–")
-                      + (s.platforms.Any(p => p.art) ? " (đang hạ tạm, nền còn vẽ bệ ở chỗ cũ)" : ""));
+                      + (s.platforms.Any(p => p.art) ? " (đang hạ tạm, nền còn vẽ bệ ở chỗ cũ)" : " – nằm đúng trên ảnh nền"));
             Check(AssetDatabase.LoadAssetAtPath<FxLibrary>(PixelPackCombat.FxLibraryPath) is { } fxLib
                   && fxLib.scaffoldContact.Length > 0 && fxLib.scaffoldBreak.Length > 0,
                   "FxLibrary: giàn giáo chạm đất + đổ sụp (CombatFX/scaffold_impact)");
+            Check(AssetDatabase.LoadAssetAtPath<FxLibrary>(PixelPackCombat.FxLibraryPath) is { } hitLib
+                  && MoveSet.Ok(hitLib.fireHit) && MoveSet.Ok(hitLib.electricHit) && MoveSet.Ok(hitLib.launchHit) && MoveSet.Ok(hitLib.stunStars),
+                  "FxLibrary: hiệu ứng trúng đòn lửa / điện / hất tung / choáng (CombatFX/skill_hit)");
 
             var audioLib = AssetDatabase.LoadAssetAtPath<AudioLibrary>($"{PixelPackBuilder.DataRoot}/AudioLibrary.asset");
             Check(audioLib && audioLib.menuMusic && audioLib.stages.Length == stages.Length && audioLib.stages.All(a => a.music && a.ambience)
                   && audioLib.hitLight.Length > 0 && audioLib.hitHeavy.Length > 0 && audioLib.explosion.Length > 0
                   && audioLib.voices.Length == fighters.Length && audioLib.voices.All(v => v.lines.Length > 0),
                   "AudioLibrary: nhạc menu + nhạc/nền từng stage, SFX va chạm/nổ, thoại 6 nhân vật");
+            Check(audioLib && audioLib.Cue("double_jump") && audioLib.Cue("rage_charge"), "SFX: double_jump + rage_charge");
 
             // ---- UI (Asset Bible mục 7)
             Check(fighters.All(f => f.portrait && f.superArt), "6 nhân vật có chân dung + banner tuyệt chiêu");

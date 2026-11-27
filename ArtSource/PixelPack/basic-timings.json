@@ -483,5 +483,16 @@
       4
     ],
     "loop": false
+  },
+  "double_jump": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "loop": false
   }
 }

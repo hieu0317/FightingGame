@@ -188,6 +188,7 @@ namespace LoanDau.Game
                     if (f.action == FighterAction.Roll) PlayCue("roll");
                     if (f.action == FighterAction.Pickup) PlayCue("pickup");
                     if (f.action == FighterAction.Toss) Variant("throw", 2);
+                    if (f.action == FighterAction.Charge) Play(lib.Cue("rage_charge"), 0.8f);   // gồng nộ: ~1 giây, phát 1 lần khi vào thế
                 }
                 if (f.normal && f.action == FighterAction.Skill && f.skillIndex != FighterData.DiveLand &&
                     (!prevNormal[i] || prevAction[i] != f.action || prevSkill[i] != f.skillIndex))
@@ -203,7 +204,11 @@ namespace LoanDau.Game
                 }
                 if (f.burnTicks > 0 && prevBurn[i] == 0) Play(Pick(lib.fire), 0.6f);
                 if (f.doubleJumpUsed && f.doubleJumpTick == sim.State.tick)
-                    Play(lib.Cue("double_jump") ?? lib.Cue("whoosh_light1"), 0.7f, 1.2f);   // chưa có tiếng riêng: mượn tiếng vung nhẹ
+                {
+                    var dj = lib.Cue("double_jump");
+                    if (dj) Play(dj, 0.8f);
+                    else Play(lib.Cue("whoosh_light1"), 0.7f, 1.2f);   // thiếu SFX/double_jump.wav: mượn tiếng vung nhẹ
+                }
                 prevAction[i] = f.action;
                 prevSkill[i] = f.skillIndex;
                 prevNormal[i] = f.normal;

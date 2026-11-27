@@ -16,6 +16,7 @@ namespace LoanDau.Core
         HitLight, HitHeavy, Block, GuardBreak, Explosion, PropBreak, Land, Knockdown, KO, Super, RoundStart, TimeOver,
         HazardWarn,     // mối nguy sắp xảy ra (biển báo xe máy, bóng đổ cần cẩu, bếp sắp bùng, tủ điện tích điện)
         HazardStrike,   // mối nguy bắt đầu gây sát thương (xe lao vào sân, gạch chạm đất, lửa bùng, phóng điện)
+        DoubleJump,
     }
 
     public struct SimEvent
@@ -25,6 +26,7 @@ namespace LoanDau.Core
         public int dir;           // hướng văng (+1 / -1)
         public int prop;          // PropBreak: chỉ số vật
         public int actor;         // HitLight/HitHeavy: người dính đòn (0/1); -1 = không rõ
+        public HitFlags hitFlags;
     }
 
     public enum PropPhase : byte { Floor, Held, Flying, Broken }
@@ -107,6 +109,7 @@ namespace LoanDau.Core
         public int skill;                 // chỉ số chiêu của người tạo (kind = Skill)
         public int x, y, vx, vy;          // y = tâm hộp
         public int age, lifetime;
+        public int scaffoldImpactAge, scaffoldImpactX, scaffoldImpactY;
         public bool returningCable;
         public int cooldown, emitTimer;
         public bool field;                // đã thành vùng đứng yên (vd dầu sôi tiếp đất)
@@ -201,8 +204,8 @@ namespace LoanDau.Core
         /// <summary>Sự kiện hiển thị của tick vừa chạy (xoá mỗi tick, không thuộc State).</summary>
         public readonly System.Collections.Generic.List<SimEvent> Events = new();
 
-        void Emit(SimEventKind k, int x, int y, int dir = 1, int prop = -1, int actor = -1) =>
-            Events.Add(new SimEvent { kind = k, x = x, y = y, dir = dir, prop = prop, actor = actor });
+        void Emit(SimEventKind k, int x, int y, int dir = 1, int prop = -1, int actor = -1, HitFlags hitFlags = HitFlags.None) =>
+            Events.Add(new SimEvent { kind = k, x = x, y = y, dir = dir, prop = prop, actor = actor, hitFlags = hitFlags });
 
         public bool InIntro => State.tick - State.roundStartTick < IntroTicks;
         /// <summary>Hiệp vừa kết thúc (K.O. / hết giờ) – khoá điều khiển, người thắng diễn clip thắng.</summary>
@@ -631,6 +634,7 @@ namespace LoanDau.Core
             else if (!f.Grounded && (pressed & Buttons.Up) != 0 && TryDoubleJump(ref f, data, held, dir))
             {
                 f.doubleJumpTick = State.tick;                           // nhảy lần 2 giữa không
+                Emit(SimEventKind.DoubleJump, f.x, f.y);
             }
             else if (f.Grounded && f.floorY > 0 && (pressed & Buttons.Up) != 0 && (b & Buttons.Down) != 0)
             {
@@ -1016,7 +1020,7 @@ namespace LoanDau.Core
             def.reeled = (flags & HitFlags.Pull) != 0;
             int hd = Fighters[defIdx].hurtHalfWidth;
             Emit(def.hitHeavy ? SimEventKind.HitHeavy : SimEventKind.HitLight,
-                 def.x - pushDir * hd * Sub, def.y + 60 * Sub, pushDir, -1, defIdx);
+                 def.x - pushDir * hd * Sub, def.y + 60 * Sub, pushDir, -1, defIdx, flags);
 
             // vật đang cầm rơi khi trúng đòn mạnh hoặc đang cầm vật Lớn (GDD mục 4)
             if (def.heldProp >= 0)
@@ -1157,7 +1161,32 @@ namespace LoanDau.Core
                 if (e.age >= e.lifetime) { e.active = false; continue; }
                 bool drops = e.kind == EffectKind.Skill && Fighters[e.owner].skills[e.skill].dropsFromAbove;
                 if (drops && e.age <= 12)
+                {
+                    int oldBottom = e.y - s.halfH * Sub;
                     e.y -= 12 * Sub;
+                    if (e.scaffoldImpactAge == 0 && Fighters[e.owner].skills[e.skill].clip?.name == "sap_gian_giao")
+                    {
+                        int bottom = e.y - s.halfH * Sub;
+                        int top = 0, contactX = e.x;
+                        // Mảnh giàn vẽ rộng 46 px, cao 65 px. Vùng sát thương lớn hơn phần khung sắt.
+                        int visualHalfWidth = s.halfH * Sub * 46 / 65;
+                        foreach (var prop in State.props)
+                        {
+                            if (prop.phase != PropPhase.Floor && prop.phase != PropPhase.Flying) continue;
+                            var box = PropBox(prop);
+                            if (box.x1 < e.x - visualHalfWidth || box.x0 > e.x + visualHalfWidth ||
+                                box.y1 > oldBottom || box.y1 < bottom || box.y1 <= top) continue;
+                            top = box.y1;
+                            contactX = Math.Clamp(prop.x, e.x - visualHalfWidth, e.x + visualHalfWidth);
+                        }
+                        if (top >= bottom)
+                        {
+                            e.scaffoldImpactAge = e.age;
+                            e.scaffoldImpactX = contactX;
+                            e.scaffoldImpactY = top;
+                        }
+                    }
+                }
                 if (!IsAttack(e))
                 {
                     StepEnvironment(ref e, s);
