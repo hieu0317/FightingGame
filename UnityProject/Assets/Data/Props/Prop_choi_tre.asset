@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: Prop_choi_tre
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  id: choi_tre
+  displayName: "Ch\u1ED5i tre"
+  sprite: {fileID: 21300000, guid: e4b681d366f914641bdc1d945faa2032, type: 3}
+  damagedSprite: {fileID: 21300000, guid: 8ae0843ee299f4a4bb8f8a043b2be507, type: 3}
+  icon: {fileID: 21300000, guid: c9131d12047d34f21bb342fa51406993, type: 3}
+  outline: {fileID: 21300000, guid: 40d64d723a7e94d8ab14812b96eb64ff, type: 3}
+  debris:
+  - {fileID: 21300000, guid: 39745d94b869140ef82f670bcd9b4327, type: 3}
+  - {fileID: 21300000, guid: 8acde162fb2f34a20af9e89a095b2d4d, type: 3}
+  - {fileID: 21300000, guid: a34063693c97c4af3a2b79acd1102c2f, type: 3}
+  size: 1
+  weaponType: 2
+  traits: 1
+  hitDamage: 35
+  throwDamage: 40
+  explodeDamage: 0
+  durability: 5
+  floorScale: 1

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: Prop_ghe_nhua
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  id: ghe_nhua
+  displayName: "Gh\u1EBF nh\u1EF1a \u0111\u1ECF"
+  sprite: {fileID: 21300000, guid: e7f3f08c5ef2d44eaa04bc7d9df7bc66, type: 3}
+  damagedSprite: {fileID: 21300000, guid: 63787e25874494e48b8da6fda871c276, type: 3}
+  icon: {fileID: 21300000, guid: 0f41ad694c2ef46bcb0ccb1ab4c72433, type: 3}
+  outline: {fileID: 21300000, guid: 84f7c5823201b4f61b28841280267d7c, type: 3}
+  debris:
+  - {fileID: 21300000, guid: cd5e38438f2aa4026a2e97d0236cf5c2, type: 3}
+  - {fileID: 21300000, guid: 37852a8e2c48b48968d648dcaa434f16, type: 3}
+  - {fileID: 21300000, guid: 0d2e0e18864624f18b66e5f80542627f, type: 3}
+  - {fileID: 21300000, guid: 42754a3b1d1fc494f93331adfbbb5f1c, type: 3}
+  - {fileID: 21300000, guid: 00b10aa48ac6844ee8b523bbe4ba19b3, type: 3}
+  - {fileID: 21300000, guid: 757c72fc285834920b8f36b133283006, type: 3}
+  size: 1
+  weaponType: 1
+  traits: 0
+  hitDamage: 45
+  throwDamage: 60
+  explodeDamage: 0
+  durability: 4
+  floorScale: 1

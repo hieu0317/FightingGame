@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: Prop_chao_gang
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  id: chao_gang
+  displayName: "Ch\u1EA3o gang"
+  sprite: {fileID: 21300000, guid: 1eb5b915188ee4bf98c144bbf58fc825, type: 3}
+  damagedSprite: {fileID: 21300000, guid: 593b48910296f4fa78d74d368d3e4d60, type: 3}
+  icon: {fileID: 21300000, guid: a6f8f355a1180457795cbd584f37e848, type: 3}
+  outline: {fileID: 21300000, guid: 3b7b76c815ba54e6594f617469e3c792, type: 3}
+  debris: []
+  size: 1
+  weaponType: 1
+  traits: 4
+  hitDamage: 60
+  throwDamage: 70
+  explodeDamage: 0
+  durability: 6
+  floorScale: 1

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: PropData_thung_phi
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  size: 2
+  weaponType: 0
+  traits: 4
+  hitDamage: 0
+  throwDamage: 110
+  durability: 2
+  model: {fileID: 919132149155446097, guid: c66d44a19e912405ea3b3d6c48bd3389, type: 3}
+  gripOffset: {x: -0, y: 0, z: 0}
+  gripRotation: {x: 0, y: -0, z: -0, w: 1}
+  localBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.302, y: 0.44, z: 0.302}
+  restRotation: {x: -0, y: -0, z: 0, w: 1}
+  restOffset: {x: -0, y: 0.44, z: -0}
+  triangleCount: 632

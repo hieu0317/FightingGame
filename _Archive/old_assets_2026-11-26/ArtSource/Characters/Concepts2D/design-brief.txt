@@ -1,0 +1,60 @@
+LOẠN ĐẤU PHỐ ĐÊM — THIẾT KẾ NHÂN VẬT 2D PIXEL / V1
+
+Nguồn tham khảo: GDD và Asset Bible do người dùng cung cấp ngày 26/11/2026.
+Yêu cầu hiện tại của người dùng: nhân vật 2D PIXEL, phong cách đường phố của người dân Việt.
+Các chỉ dẫn Blender, FBX, rig Humanoid trong tài liệu là quy trình 3D tham khảo; không phải yêu cầu thực thi của lượt này.
+
+HƯỚNG MỸ THUẬT
+Pixel art 2D, cụm pixel vuông rõ, viền bậc thang, đổ bóng 2–3 mảng, tỷ lệ khoảng 6 đầu.
+Mục tiêu mật độ chi tiết khoảng 96 pixel chiều cao nhân vật; ảnh AI là concept,
+không phải sprite đã chuẩn hóa lưới 96 pixel. Dùng ảnh concept để dựng sprite native.
+Không làm mịn hoặc lọc bilinear; khi sản xuất dùng phóng nguyên lần / nearest-neighbor.
+Giữ sáu vai trò và màu nhận diện của tài liệu. Trang phục bám đời sống khu phố:
+võ đường trong hẻm, công trường, parkour sân thượng, quán lẩu, sửa điện, hàng nước.
+Dáng người và khối trang phục phải phân biệt được khi thu nhỏ.
+Không dùng logo thương hiệu. Đạo cụ cầm tay là asset rời khi sản xuất sprite.
+Đây là thiết kế hình ảnh, chưa phải bộ animation hoặc sprite sheet đã kiểm tra trong Unity.
+
+ROSTER
+Long — 1,78 m — toàn diện — đỏ #D7263D.
+Áo khoác thể thao đỏ bên ngoài áo tập Vovinam xanh; đai đỏ; quần tập xanh sẫm;
+băng tay, băng trán; giày vải. Dáng cân đối, thế thủ chắc.
+Đây là điều chỉnh trang phục từ võ phục trong tài liệu để tăng chất đường phố,
+vẫn giữ lớp áo tập và nền tảng Vovinam.
+
+Bảo — 2,05 m — tank/vật — vàng #F4B400.
+Mũ bảo hộ, áo phản quang, quần lao động, giày bảo hộ; thân to, vai rộng.
+Búa tạ là đạo cụ riêng.
+
+Linh — 1,62 m — áp sát/tốc độ — tím #7B2CBF.
+Hoodie ngắn, áo trong kín thân, jogger, giày thể thao, tóc buộc cao.
+Khẩu trang có nét mèo nhỏ; không thêm tai hoặc đuôi mèo. Dáng nhẹ và linh hoạt.
+
+Mai — 1,68 m — khống chế tầm xa — cam #F77F00.
+Áo bếp xắn tay, tạp dề kem, khăn trùm đầu, quần lửng, giày bếp kín mũi.
+Dáng khỏe, hơi đẫy, gương mặt biểu cảm. Chảo và muôi là đạo cụ riêng.
+
+Khang — 1,74 m — bẫy/khống chế — xanh #1E88E5.
+Áo làm việc xanh khoác ngoài áo thun, quần túi hộp bạc màu, đai dụng cụ,
+cuộn cáp gọn trên vai. Dáng gầy, hơi gù. Kìm điện là đạo cụ riêng.
+
+Bà Tư — 1,52 m — phản đòn — xanh lá #43A047.
+Áo bà ba, quần đen, dép, tóc bạc búi thấp, nón lá.
+Dáng thấp, hơi còng nhưng lanh lợi. Gậy trúc và quạt giấy là đạo cụ riêng.
+
+PHẠM VI BÀN GIAO V1
+1. Bảng concept pixel đủ 6 nhân vật.
+2. Long pixel: một tư thế thủ toàn thân, hướng phải, nền trong suốt.
+Ảnh Long là hình tĩnh để duyệt mỹ thuật; cần vẽ các frame chuyển động, chuẩn hóa
+canvas/pivot/scale và thử trong game trước khi coi là asset gameplay hoàn chỉnh.
+Không thay nhân vật prototype hoặc sửa gameplay trong lượt thiết kế này.
+
+GỢI Ý CHO BƯỚC SẢN XUẤT SAU DUYỆT
+Tách sprite cơ thể / đạo cụ / VFX; chân ở cùng baseline; chừa biên cho tay chân.
+Giữ mặt và quần áo nhất quán giữa các frame; phụ kiện bất đối xứng cần kiểm tra
+khi đổi hướng. Thử silhouette và độ tương phản trên nền chợ đêm hiện có.
+Không áp dụng ngân sách tam giác, auto-rig hoặc Mixamo cho tranh 2D này.
+
+CÔNG CỤ
+Built-in image_gen; không dùng Fal hoặc CLI/API fallback.
+Prompt chính xác được lưu trong prompts.txt.

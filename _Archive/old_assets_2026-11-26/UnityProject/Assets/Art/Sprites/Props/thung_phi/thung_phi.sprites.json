@@ -1,0 +1,68 @@
+{
+  "key": "thung_phi",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "sprites": [
+    {
+      "file": "thung_phi.png",
+      "size_px": [
+        163,
+        258
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.604,
+        0.9751
+      ],
+      "pivot": [
+        0.49883,
+        0.07225
+      ],
+      "grip_px": [
+        81.31,
+        128.82
+      ],
+      "role": "rest"
+    },
+    {
+      "file": "thung_phi_dented.png",
+      "size_px": [
+        161,
+        258
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.5976,
+        0.9751
+      ],
+      "pivot": [
+        0.49994,
+        0.07225
+      ],
+      "role": "dented"
+    },
+    {
+      "file": "thung_phi_held.png",
+      "size_px": [
+        163,
+        258
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.604,
+        0.9751
+      ],
+      "pivot": [
+        0.49883,
+        0.4993
+      ],
+      "role": "held"
+    }
+  ],
+  "prop_size": "lon",
+  "weapon_type": "none",
+  "hit_dmg": 0,
+  "throw_dmg": 110,
+  "durability": 2,
+  "traits": "metal"
+}

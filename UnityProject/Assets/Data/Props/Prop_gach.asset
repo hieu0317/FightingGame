@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: Prop_gach
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  id: gach
+  displayName: "G\u1EA1ch"
+  sprite: {fileID: 21300000, guid: f85e1b2a95b74403cb55586a3952cc60, type: 3}
+  damagedSprite: {fileID: 21300000, guid: 40fac2fe1b45549ecb48bcd6760e1dc4, type: 3}
+  icon: {fileID: 21300000, guid: 74d52e1fb8b14432d910b7cf3d24345f, type: 3}
+  outline: {fileID: 21300000, guid: 7a6d7dce3fa334527894349e38b7325f, type: 3}
+  debris:
+  - {fileID: 21300000, guid: 762026aab058b4ffcb40e9051b62b704, type: 3}
+  - {fileID: 21300000, guid: 30bfb489c6a8c41a2b0ca86538667802, type: 3}
+  - {fileID: 21300000, guid: df1aa740523564784a3a2bc1aba83ae8, type: 3}
+  - {fileID: 21300000, guid: b5b6b42157cdf46c9b9d9ddca1e8ac80, type: 3}
+  size: 0
+  weaponType: 0
+  traits: 16
+  hitDamage: 0
+  throwDamage: 80
+  explodeDamage: 0
+  durability: 1
+  floorScale: 1

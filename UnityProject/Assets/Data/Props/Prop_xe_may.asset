@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: Prop_xe_may
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  id: xe_may
+  displayName: "Xe m\xE1y c\u0169"
+  sprite: {fileID: 21300000, guid: 3b044777bf7254404ab45e54053e6265, type: 3}
+  damagedSprite: {fileID: 21300000, guid: a88c97958ea9e46b1b41d9adf4086f17, type: 3}
+  icon: {fileID: 21300000, guid: 7c43fad4b50a54d99b80ccfff2070e22, type: 3}
+  outline: {fileID: 21300000, guid: 9efcb79f4b4494ae49dd5b78878c5094, type: 3}
+  debris: []
+  size: 3
+  weaponType: 0
+  traits: 6
+  hitDamage: 0
+  throwDamage: 180
+  explodeDamage: 0
+  durability: 1
+  floorScale: 1

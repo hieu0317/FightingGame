@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8939a2bdbb9114b03bb48ce8f3e98908, type: 3}
+  m_Name: PropData_ghe_nhua
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.PropData
+  size: 1
+  weaponType: 1
+  traits: 0
+  hitDamage: 45
+  throwDamage: 60
+  durability: 4
+  model: {fileID: 919132149155446097, guid: dbdd894fd4f774834b1f6a7174b933cb, type: 3}
+  gripOffset: {x: -0, y: 0, z: 0}
+  gripRotation: {x: 0, y: -0, z: -0, w: 1}
+  localBounds:
+    m_Center: {x: 0, y: 0.300983, z: 0.005847454}
+    m_Extent: {x: 0.225, y: 0.31722605, z: 0.31722605}
+  restRotation: {x: 0.93819135, y: 0, z: 0, w: -0.34611705}
+  restOffset: {x: -0, y: 0.45, z: 0.2}
+  triangleCount: 384

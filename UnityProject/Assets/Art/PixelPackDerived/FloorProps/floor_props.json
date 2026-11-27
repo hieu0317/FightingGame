@@ -1,0 +1,209 @@
+{
+  "source_fighter": "long",
+  "props": {
+    "binh_gas": {
+      "method": "landed",
+      "size_px": [
+        27,
+        44
+      ],
+      "icon_px": [
+        56,
+        92
+      ],
+      "ratio": 0.478,
+      "damaged_px": [
+        33,
+        53
+      ],
+      "debris": 0
+    },
+    "bua_ta": {
+      "method": "diff",
+      "size_px": [
+        43,
+        46
+      ],
+      "icon_px": [
+        82,
+        89
+      ],
+      "ratio": 0.517,
+      "damaged_px": [
+        51,
+        57
+      ],
+      "debris": 0
+    },
+    "chai_thuy_tinh": {
+      "method": "diff",
+      "size_px": [
+        10,
+        31
+      ],
+      "icon_px": [
+        28,
+        81
+      ],
+      "ratio": 0.383,
+      "damaged_px": [
+        35,
+        42
+      ],
+      "debris": 4
+    },
+    "chao_gang": {
+      "method": "diff",
+      "size_px": [
+        32,
+        21
+      ],
+      "icon_px": [
+        102,
+        68
+      ],
+      "ratio": 0.309,
+      "damaged_px": [
+        34,
+        24
+      ],
+      "debris": 0
+    },
+    "choi_tre": {
+      "method": "diff",
+      "size_px": [
+        42,
+        48
+      ],
+      "icon_px": [
+        89,
+        97
+      ],
+      "ratio": 0.495,
+      "damaged_px": [
+        54,
+        54
+      ],
+      "debris": 3
+    },
+    "gach": {
+      "method": "diff",
+      "size_px": [
+        14,
+        11
+      ],
+      "icon_px": [
+        82,
+        63
+      ],
+      "ratio": 0.175,
+      "damaged_px": [
+        19,
+        16
+      ],
+      "debris": 4
+    },
+    "ghe_nhua": {
+      "method": "diff",
+      "size_px": [
+        24,
+        21
+      ],
+      "icon_px": [
+        87,
+        75
+      ],
+      "ratio": 0.28,
+      "damaged_px": [
+        31,
+        26
+      ],
+      "debris": 6
+    },
+    "noi_pho": {
+      "method": "puddle",
+      "size_px": [
+        38,
+        24
+      ],
+      "icon_px": [
+        94,
+        87
+      ],
+      "ratio": 0.276,
+      "damaged_px": [
+        30,
+        28
+      ],
+      "debris": 0
+    },
+    "ong_tuyp": {
+      "method": "diff",
+      "size_px": [
+        40,
+        20
+      ],
+      "icon_px": [
+        101,
+        52
+      ],
+      "ratio": 0.385,
+      "damaged_px": [
+        42,
+        23
+      ],
+      "debris": 0
+    },
+    "thung_phi": {
+      "method": "landed",
+      "size_px": [
+        35,
+        48
+      ],
+      "icon_px": [
+        65,
+        90
+      ],
+      "ratio": 0.533,
+      "damaged_px": [
+        46,
+        59
+      ],
+      "debris": 0
+    },
+    "thung_son": {
+      "method": "puddle",
+      "size_px": [
+        24,
+        16
+      ],
+      "icon_px": [
+        71,
+        76
+      ],
+      "ratio": 0.211,
+      "damaged_px": [
+        21,
+        23
+      ],
+      "debris": 0
+    },
+    "xe_may": {
+      "method": "diff_day",
+      "size_px": [
+        92,
+        64
+      ],
+      "icon_px": [
+        126,
+        89
+      ],
+      "ratio": 0.719,
+      "damaged_px": [
+        79,
+        57
+      ],
+      "debris": 0
+    }
+  }
+}

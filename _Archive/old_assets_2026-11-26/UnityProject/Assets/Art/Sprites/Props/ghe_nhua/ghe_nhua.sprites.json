@@ -1,0 +1,177 @@
+{
+  "key": "ghe_nhua",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "sprites": [
+    {
+      "file": "ghe_nhua.png",
+      "size_px": [
+        126,
+        144
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.46,
+        0.5293
+      ],
+      "pivot": [
+        0.49905,
+        0.11257
+      ],
+      "grip_px": [
+        62.88,
+        118.29
+      ],
+      "role": "rest"
+    },
+    {
+      "file": "ghe_nhua_broken_01.png",
+      "size_px": [
+        54,
+        81
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1795,
+        0.2849
+      ],
+      "pivot": [
+        0.38352,
+        0.51494
+      ],
+      "role": "piece",
+      "offset_m": [
+        -0.1647,
+        0.0996
+      ]
+    },
+    {
+      "file": "ghe_nhua_broken_02.png",
+      "size_px": [
+        36,
+        88
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1071,
+        0.309
+      ],
+      "pivot": [
+        0.54222,
+        0.68568
+      ],
+      "role": "piece",
+      "offset_m": [
+        -0.1482,
+        0.3919
+      ]
+    },
+    {
+      "file": "ghe_nhua_broken_03.png",
+      "size_px": [
+        46,
+        35
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1447,
+        0.1049
+      ],
+      "pivot": [
+        0.50522,
+        0.498
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0113,
+        0.0979
+      ]
+    },
+    {
+      "file": "ghe_nhua_broken_04.png",
+      "size_px": [
+        58,
+        45
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1915,
+        0.1414
+      ],
+      "pivot": [
+        0.52621,
+        0.554
+      ],
+      "role": "piece",
+      "offset_m": [
+        -0.0177,
+        0.4219
+      ]
+    },
+    {
+      "file": "ghe_nhua_broken_05.png",
+      "size_px": [
+        47,
+        81
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1512,
+        0.2832
+      ],
+      "pivot": [
+        0.5783,
+        0.51395
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.1693,
+        0.0993
+      ]
+    },
+    {
+      "file": "ghe_nhua_broken_06.png",
+      "size_px": [
+        45,
+        88
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.1421,
+        0.3115
+      ],
+      "pivot": [
+        0.432,
+        0.69364
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.1272,
+        0.3929
+      ]
+    },
+    {
+      "file": "ghe_nhua_held.png",
+      "size_px": [
+        126,
+        162
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.46,
+        0.6004
+      ],
+      "pivot": [
+        0.49905,
+        0.0242
+      ],
+      "role": "held"
+    }
+  ],
+  "prop_size": "vua",
+  "weapon_type": "blunt",
+  "hit_dmg": 45,
+  "throw_dmg": 60,
+  "durability": 4,
+  "traits": ""
+}

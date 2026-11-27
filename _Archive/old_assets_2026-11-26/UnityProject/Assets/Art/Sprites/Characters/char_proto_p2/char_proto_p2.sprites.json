@@ -1,0 +1,33 @@
+{
+  "key": "char_proto_p2",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "facing": "right",
+  "sprites": [
+    {
+      "file": "char_proto_p2_idle.png",
+      "size_px": [
+        181,
+        471
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.674,
+        1.8082
+      ],
+      "pivot": [
+        0.44481,
+        0.02142
+      ],
+      "hand_r_px": [
+        67.24,
+        239.46
+      ],
+      "hand_l_px": [
+        149.46,
+        276.12
+      ],
+      "role": "idle"
+    }
+  ]
+}

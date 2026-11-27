@@ -1,0 +1,75 @@
+{
+  "key": "chodem",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "sprites": [
+    {
+      "file": "chodem_bg.png",
+      "size_px": [
+        8192,
+        3512
+      ],
+      "ppu": 256,
+      "size_m": [
+        32.0,
+        13.715
+      ],
+      "pivot": [
+        0.5,
+        0.11021
+      ],
+      "role": "bg"
+    },
+    {
+      "file": "chodem_mid.png",
+      "size_px": [
+        8192,
+        3512
+      ],
+      "ppu": 256,
+      "size_m": [
+        32.0,
+        13.715
+      ],
+      "pivot": [
+        0.5,
+        0.11021
+      ],
+      "role": "mid"
+    },
+    {
+      "file": "chodem_play.png",
+      "size_px": [
+        8192,
+        3512
+      ],
+      "ppu": 256,
+      "size_m": [
+        32.0,
+        13.715
+      ],
+      "pivot": [
+        0.5,
+        0.11021
+      ],
+      "role": "play"
+    },
+    {
+      "file": "chodem_fg.png",
+      "size_px": [
+        8192,
+        3512
+      ],
+      "ppu": 256,
+      "size_m": [
+        32.0,
+        13.715
+      ],
+      "pivot": [
+        0.5,
+        0.11021
+      ],
+      "role": "fg"
+    }
+  ]
+}

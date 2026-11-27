@@ -1,0 +1,156 @@
+{
+  "key": "chai_thuy_tinh",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "sprites": [
+    {
+      "file": "chai_thuy_tinh.png",
+      "size_px": [
+        26,
+        73
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.07,
+        0.2534
+      ],
+      "pivot": [
+        0.49846,
+        0.07767
+      ],
+      "grip_px": [
+        12.96,
+        58.26
+      ],
+      "role": "rest"
+    },
+    {
+      "file": "chai_thuy_tinh_broken_01.png",
+      "size_px": [
+        26,
+        25
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.07,
+        0.0627
+      ],
+      "pivot": [
+        0.49846,
+        0.4188
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0,
+        0.0187
+      ]
+    },
+    {
+      "file": "chai_thuy_tinh_broken_02.png",
+      "size_px": [
+        26,
+        25
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.07,
+        0.0648
+      ],
+      "pivot": [
+        0.49846,
+        0.4888
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0,
+        0.0767
+      ]
+    },
+    {
+      "file": "chai_thuy_tinh_broken_03.png",
+      "size_px": [
+        26,
+        21
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.07,
+        0.0479
+      ],
+      "pivot": [
+        0.49885,
+        0.55524
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0,
+        0.1266
+      ]
+    },
+    {
+      "file": "chai_thuy_tinh_broken_04.png",
+      "size_px": [
+        26,
+        26
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.07,
+        0.0677
+      ],
+      "pivot": [
+        0.49885,
+        0.46808
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0001,
+        0.1697
+      ]
+    },
+    {
+      "file": "chai_thuy_tinh_broken_05.png",
+      "size_px": [
+        17,
+        23
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.033,
+        0.058
+      ],
+      "pivot": [
+        0.48412,
+        0.58391
+      ],
+      "role": "piece",
+      "offset_m": [
+        0.0,
+        0.2257
+      ]
+    },
+    {
+      "file": "chai_thuy_tinh_held.png",
+      "size_px": [
+        26,
+        73
+      ],
+      "ppu": 256,
+      "size_m": [
+        0.0666,
+        0.2539
+      ],
+      "pivot": [
+        0.48154,
+        0.20068
+      ],
+      "role": "held"
+    }
+  ],
+  "prop_size": "nho",
+  "weapon_type": "none",
+  "hit_dmg": 0,
+  "throw_dmg": 70,
+  "durability": 1,
+  "traits": "fragile"
+}

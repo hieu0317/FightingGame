@@ -1,0 +1,2398 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff8c3f8ebf1844ffa2a6ed97063a643, type: 3}
+  m_Name: Fighter_long
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.FighterData
+  id: long
+  displayName: "Long \"Quy\u1EC1n S\u1EAFt\""
+  playstyle: "To\xE0n di\u1EC7n (all-rounder)"
+  color: {r: 0.84313726, g: 0.14901961, b: 0.23921569, a: 1}
+  idle: {fileID: 21300000, guid: d049e38d3d4df4640be2d882337c9194, type: 3}
+  portrait: {fileID: 21300000, guid: a9ca2cc98d5f346fda07eba9525ea23a, type: 3}
+  superArt: {fileID: 21300000, guid: 53cda324d5d864f9ea8261156a03b74e, type: 3}
+  maxHp: 1000
+  walkSpeed: 32
+  jumpVelocity: 120
+  passiveName: "Li\xEAn Ho\xE0n"
+  passiveEffect: "T\u1EEB hit th\u1EE9 4 tr\u1EDF \u0111i trong combo, s\xE1t th\u01B0\u01A1ng +15%"
+  propAffinity: "V\u0169 kh\xED d\xE0i th\xEAm 1 nh\u1ECBp combo"
+  throwsIgnite: 0
+  electrifyRadiusPx: 0
+  hurtHalfWidth: 20
+  hurtHeight: 105
+  combatVersion: 5
+  skills:
+  - name: "Long Kh\xED Ch\u01B0\u1EDFng"
+    input: 0
+    cost: 15
+    effect: "Ph\xF3ng lu\u1ED3ng kh\xED bay th\u1EB3ng, 80 s\xE1t th\u01B0\u01A1ng"
+    clip:
+      name: long_khi_chuong
+      frames:
+      - {fileID: 21300000, guid: 2b97f4084659d48f8a41127fff9b6263, type: 3}
+      - {fileID: 21300000, guid: 07c02fe1648a4d94aad9e14f2afaf48d, type: 3}
+      - {fileID: 21300000, guid: 91a5bff0a48e426786e72f5c3267c916, type: 3}
+      - {fileID: 21300000, guid: b0adf7bafba14c00bd53a980d1c3fedb, type: 3}
+      - {fileID: 21300000, guid: 68e622924813b46edb4068aa24d9240c, type: 3}
+      - {fileID: 21300000, guid: 126536365ad741318b68dca811a8fa3e, type: 3}
+      - {fileID: 21300000, guid: 59d9bf3109ae43b7b2dd248cd98aa59d, type: 3}
+      - {fileID: 21300000, guid: b001263c708c4a36b0c6aa3f3c4798f0, type: 3}
+      - {fileID: 21300000, guid: 958f65dd1ca31407fa640f53c69d5940, type: 3}
+      - {fileID: 21300000, guid: 4c7a808c38d14a8f883ecb862e352a66, type: 3}
+      - {fileID: 21300000, guid: 53f12a9cd2a24a1db0d707863a493997, type: 3}
+      - {fileID: 21300000, guid: f91eb9a91a374e678f0bbef999f4a540, type: 3}
+      - {fileID: 21300000, guid: 2c4b460159c14cd5bb04ec6fcbe0c34f, type: 3}
+      - {fileID: 21300000, guid: 5063e76ee08a41be927030d5751d4053, type: 3}
+      - {fileID: 21300000, guid: 85c876b2efdcb46c39ee38f5f21bfef2, type: 3}
+      - {fileID: 21300000, guid: b9cb36cad4dd4d43b5332b5f631d7a80, type: 3}
+      - {fileID: 21300000, guid: b9cb36cad4dd4d43b5332b5f631d7a80, type: 3}
+      startTicks: 00000000030000000400000006000000080000000a0000000b0000000d0000000e000000110000001300000015000000170000001a0000001c0000001e0000001f000000i
+      lengthTicks: 33
+      loop: 0
+    risingArt:
+      name: rise
+      frames:
+      - {fileID: 21300000, guid: a16d1e0f5755e96ca810693af1548d91, type: 3}
+      - {fileID: 21300002, guid: a16d1e0f5755e96ca810693af1548d91, type: 3}
+      - {fileID: 21300004, guid: a16d1e0f5755e96ca810693af1548d91, type: 3}
+      - {fileID: 21300006, guid: a16d1e0f5755e96ca810693af1548d91, type: 3}
+      - {fileID: 21300006, guid: a16d1e0f5755e96ca810693af1548d91, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    fallingArt:
+      name: fall
+      frames:
+      - {fileID: 21300000, guid: 706e89ccb7aa0d1186721554f8fe2579, type: 3}
+      - {fileID: 21300002, guid: 706e89ccb7aa0d1186721554f8fe2579, type: 3}
+      - {fileID: 21300004, guid: 706e89ccb7aa0d1186721554f8fe2579, type: 3}
+      - {fileID: 21300006, guid: 706e89ccb7aa0d1186721554f8fe2579, type: 3}
+      - {fileID: 21300006, guid: 706e89ccb7aa0d1186721554f8fe2579, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 2
+    hits: []
+    effectSpec:
+      enabled: 1
+      spawnTick: 14
+      offsetX: 40
+      offsetY: 62
+      speed: 96
+      vy: 0
+      gravity: 0
+      halfW: 12
+      halfH: 9
+      damage: 80
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 110
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames:
+      - {fileID: 21300000, guid: 9fcf4104a7eb544fa63ae6b940ae9628, type: 3}
+      - {fileID: 21300000, guid: 49447b4ec72b5bbf8546968c826065c4, type: 3}
+      - {fileID: 21300000, guid: 82e2f5b63afc5ac69b70e4d002569f24, type: 3}
+      - {fileID: 21300000, guid: a5a68448b19f5234b36aeb3f5ff06200, type: 3}
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "C\u01B0\u1EDBc Bay"
+    input: 1
+    cost: 20
+    effect: "Lao t\u1EDBi b\u1EB1ng c\xFA \u0111\xE1 bay, xuy\xEAn qua \u0111\xF2n nh\u1EB9"
+    clip:
+      name: cuoc_bay
+      frames:
+      - {fileID: 21300000, guid: 3d3a9780a5ac74d248e4000e361d8870, type: 3}
+      - {fileID: 21300000, guid: e8d2fc94152146a5b2b0c834d563a621, type: 3}
+      - {fileID: 21300000, guid: 2f744b0985704884a0d97380623228f1, type: 3}
+      - {fileID: 21300000, guid: dc9a40faa9fd4cf099fc9e0914ecd1f4, type: 3}
+      - {fileID: 21300000, guid: a863ed54396654d85bbf7e0e59272e02, type: 3}
+      - {fileID: 21300000, guid: f4f0c82d6b554fe587479e83e432ed99, type: 3}
+      - {fileID: 21300000, guid: 7c78337ce3f247a0bc85465d28cd1862, type: 3}
+      - {fileID: 21300000, guid: 42f7447930374d23b47892e06bbfcd84, type: 3}
+      - {fileID: 21300000, guid: fc434d1326137402e891097fdf16c88a, type: 3}
+      - {fileID: 21300000, guid: 65e6a18ac06d4a068eabe5b3f45444ad, type: 3}
+      - {fileID: 21300000, guid: 2845b82f34a14e8c9303681e3c93c7e0, type: 3}
+      - {fileID: 21300000, guid: 81fe6bddfd87449a8ea2a0f845ca648a, type: 3}
+      - {fileID: 21300000, guid: 352ce11f230c4b7f94fa040b4a886e60, type: 3}
+      - {fileID: 21300000, guid: 1bacae5d941f452abc85e6d0e40bf38f, type: 3}
+      - {fileID: 21300000, guid: 537a4854c85d6476284c54915b0f54b7, type: 3}
+      - {fileID: 21300000, guid: dc0d3839924d44039890d78873f13fe6, type: 3}
+      - {fileID: 21300000, guid: dc0d3839924d44039890d78873f13fe6, type: 3}
+      startTicks: 00000000030000000400000006000000080000000a0000000b0000000d0000000e000000110000001300000015000000170000001a0000001c0000001e0000001f000000i
+      lengthTicks: 33
+      loop: 0
+    risingArt:
+      name: rise
+      frames:
+      - {fileID: 21300000, guid: b9c07e92c583297ea5c88ae6a759f206, type: 3}
+      - {fileID: 21300002, guid: b9c07e92c583297ea5c88ae6a759f206, type: 3}
+      - {fileID: 21300004, guid: b9c07e92c583297ea5c88ae6a759f206, type: 3}
+      - {fileID: 21300006, guid: b9c07e92c583297ea5c88ae6a759f206, type: 3}
+      - {fileID: 21300006, guid: b9c07e92c583297ea5c88ae6a759f206, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    fallingArt:
+      name: fall
+      frames:
+      - {fileID: 21300000, guid: 17a8f3628176e992d01e98122ff80a0f, type: 3}
+      - {fileID: 21300002, guid: 17a8f3628176e992d01e98122ff80a0f, type: 3}
+      - {fileID: 21300004, guid: 17a8f3628176e992d01e98122ff80a0f, type: 3}
+      - {fileID: 21300006, guid: 17a8f3628176e992d01e98122ff80a0f, type: 3}
+      - {fileID: 21300006, guid: 17a8f3628176e992d01e98122ff80a0f, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 1
+    hits:
+    - startTick: 14
+      endTick: 22
+      x0: 26
+      x1: 61
+      y0: 21
+      y1: 71
+      damage: 90
+      hitstun: 24
+      pushPx: 20
+      flags: 8
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 48
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xF2n Ch\xE2n K\u1EB9p"
+    input: 2
+    cost: 25
+    effect: "Nh\u1EA3y k\u1EB9p c\u1ED5 v\u1EADt ng\xE3 \u0111\u1ED1i th\u1EE7 (\u0111\xF2n \u0111\u1EB7c tr\u01B0ng Vovinam), kh\xF4ng th\u1EC3 \u0111\u1EE1"
+    clip:
+      name: don_chan_kep
+      frames:
+      - {fileID: 21300000, guid: 2b8b2a19df6dc4c35aacca3080082d9e, type: 3}
+      - {fileID: 21300000, guid: 2a3fd6f82f3c446abf9b1c12645ae0b0, type: 3}
+      - {fileID: 21300000, guid: ee8fee8f9fe049fdaaa43bd0d4f7bae0, type: 3}
+      - {fileID: 21300000, guid: 611ae01cbba4455baba79d45d15a32fe, type: 3}
+      - {fileID: 21300000, guid: 10c54af4c75294318a8957bb68681216, type: 3}
+      - {fileID: 21300000, guid: df5db4419f2146bcb275001779b1dbcd, type: 3}
+      - {fileID: 21300000, guid: 45eabbd955c64a37a5afa5ca75071d51, type: 3}
+      - {fileID: 21300000, guid: d0fc5339f8a4477f96e0ab95a6f3e203, type: 3}
+      - {fileID: 21300000, guid: 0eebd2d9cccb443b6bd851096a112181, type: 3}
+      - {fileID: 21300000, guid: 6d23cbd915604c428f935b12d664474d, type: 3}
+      - {fileID: 21300000, guid: fe020219f55b4a08a9b52b6636c42333, type: 3}
+      - {fileID: 21300000, guid: 04392700aab34a34acbdb84b65694701, type: 3}
+      - {fileID: 21300000, guid: 18d5f8f0b6504e7784640862f2eb829c, type: 3}
+      - {fileID: 21300000, guid: 131a32ba6a4d4c58b5159b1f3f3153f2, type: 3}
+      - {fileID: 21300000, guid: a91a8fb4c2bd54db28653795edca8925, type: 3}
+      - {fileID: 21300000, guid: 5c07710c39a14cb69f3aa336d082ace5, type: 3}
+      - {fileID: 21300000, guid: 5c07710c39a14cb69f3aa336d082ace5, type: 3}
+      startTicks: 00000000030000000400000006000000080000000a0000000b0000000d0000000e000000110000001300000015000000170000001a0000001c0000001e0000001f000000i
+      lengthTicks: 33
+      loop: 0
+    risingArt:
+      name: rise
+      frames:
+      - {fileID: 21300000, guid: 81d699ef85ae804950d40d59ae38547d, type: 3}
+      - {fileID: 21300002, guid: 81d699ef85ae804950d40d59ae38547d, type: 3}
+      - {fileID: 21300004, guid: 81d699ef85ae804950d40d59ae38547d, type: 3}
+      - {fileID: 21300006, guid: 81d699ef85ae804950d40d59ae38547d, type: 3}
+      - {fileID: 21300006, guid: 81d699ef85ae804950d40d59ae38547d, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    fallingArt:
+      name: fall
+      frames:
+      - {fileID: 21300000, guid: 748ec01b0cca610f4bfa3ccefed828da, type: 3}
+      - {fileID: 21300002, guid: 748ec01b0cca610f4bfa3ccefed828da, type: 3}
+      - {fileID: 21300004, guid: 748ec01b0cca610f4bfa3ccefed828da, type: 3}
+      - {fileID: 21300006, guid: 748ec01b0cca610f4bfa3ccefed828da, type: 3}
+      - {fileID: 21300006, guid: 748ec01b0cca610f4bfa3ccefed828da, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 14
+      endTick: 22
+      x0: 26
+      x1: 69
+      y0: 16
+      y1: 81
+      damage: 100
+      hitstun: 24
+      pushPx: 20
+      flags: 9
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 70
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "Th\u0103ng Long Quy\u1EC1n"
+    input: 3
+    cost: 20
+    effect: "\u0110\u1EA5m m\xF3c l\xEAn, b\u1EA5t t\u1EED trong frame \u0111\u1EA7u \u2013 ch\u1ED1ng nh\u1EA3y v\xE0 ch\u1ED1ng v\u1EADt n\xE9m"
+    clip:
+      name: thang_long_quyen
+      frames:
+      - {fileID: 21300000, guid: 5a936f4c5a30643bdaea1c1ae253cc8e, type: 3}
+      - {fileID: 21300000, guid: 6bf0199a3de549bb8e4aea3e4f6020f9, type: 3}
+      - {fileID: 21300000, guid: 76828b1a78084966930b3a5b4f2b8241, type: 3}
+      - {fileID: 21300000, guid: 04ab13d1bc85480b96fd152c4c4b5229, type: 3}
+      - {fileID: 21300000, guid: 3c2c3723d7638458c9f347dfc3c80ecb, type: 3}
+      - {fileID: 21300000, guid: 94dafbc5f6bc4cd6a357d64b846def1f, type: 3}
+      - {fileID: 21300000, guid: 5bf93460e715404ca831665413d777ba, type: 3}
+      - {fileID: 21300000, guid: f61b4059ede64288858652914d6c8b45, type: 3}
+      - {fileID: 21300000, guid: f656a3e4ea0e84e0586e85d7ccb99b18, type: 3}
+      - {fileID: 21300000, guid: ca8a7928ee0e40738c76693951feeb7e, type: 3}
+      - {fileID: 21300000, guid: bd34eaea7e0f4e4c8b28838ee249f4f9, type: 3}
+      - {fileID: 21300000, guid: 1c4d85ec5f644697931b8025c003b3e8, type: 3}
+      - {fileID: 21300000, guid: 45e2a67ab5a74f65b946e9a104ef2d63, type: 3}
+      - {fileID: 21300000, guid: e47dcb2537d147ba84cb2a7533eea238, type: 3}
+      - {fileID: 21300000, guid: a384b6be2487448f1b6c19b0404e7965, type: 3}
+      - {fileID: 21300000, guid: 0a19fc0451cc49e3bc70c594dcab02c0, type: 3}
+      - {fileID: 21300000, guid: 0a19fc0451cc49e3bc70c594dcab02c0, type: 3}
+      startTicks: 00000000030000000400000006000000080000000a0000000b0000000d0000000e000000110000001300000015000000170000001a0000001c0000001e0000001f000000i
+      lengthTicks: 33
+      loop: 0
+    risingArt:
+      name: rise
+      frames:
+      - {fileID: 21300000, guid: 5ac714db5aeeb5ac690036d4ae10c3e6, type: 3}
+      - {fileID: 21300002, guid: 5ac714db5aeeb5ac690036d4ae10c3e6, type: 3}
+      - {fileID: 21300004, guid: 5ac714db5aeeb5ac690036d4ae10c3e6, type: 3}
+      - {fileID: 21300006, guid: 5ac714db5aeeb5ac690036d4ae10c3e6, type: 3}
+      - {fileID: 21300006, guid: 5ac714db5aeeb5ac690036d4ae10c3e6, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    fallingArt:
+      name: fall
+      frames:
+      - {fileID: 21300000, guid: 95772bc322d4447eb6107d1f950afcd8, type: 3}
+      - {fileID: 21300002, guid: 95772bc322d4447eb6107d1f950afcd8, type: 3}
+      - {fileID: 21300004, guid: 95772bc322d4447eb6107d1f950afcd8, type: 3}
+      - {fileID: 21300006, guid: 95772bc322d4447eb6107d1f950afcd8, type: 3}
+      - {fileID: 21300006, guid: 95772bc322d4447eb6107d1f950afcd8, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 14
+      endTick: 22
+      x0: 26
+      x1: 51
+      y0: 29
+      y1: 125
+      damage: 90
+      hitstun: 24
+      pushPx: 20
+      flags: 16
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 64
+    invulnTicks: 10
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "Long H\u1ED5 H\u1ED9i"
+    input: 4
+    cost: 100
+    effect: "Chu\u1ED7i 8 \u0111\xF2n \u0111\u1EA5m \u0111\xE1, k\u1EBFt th\xFAc b\u1EB1ng c\u01B0\u1EDBc \u0111\xE1 h\u1EA5t tung \u0111\u1ED1i th\u1EE7"
+    clip:
+      name: long_ho_hoi
+      frames:
+      - {fileID: 21300000, guid: e44e9213401d34f25bde43958c378653, type: 3}
+      - {fileID: 21300000, guid: 8e4a2bcb1531410a870db458b875e493, type: 3}
+      - {fileID: 21300000, guid: cb7a0eb7db3f4ceb98bb3a91306b6a06, type: 3}
+      - {fileID: 21300000, guid: 505457e466204c9bb3fb4d06893672ae, type: 3}
+      - {fileID: 21300000, guid: b7081361159f34460b131e6a3580419d, type: 3}
+      - {fileID: 21300000, guid: a8a74710c4f74b5d83fa3f284fa5dd2c, type: 3}
+      - {fileID: 21300000, guid: b3b510388bd7492186b125d02f29186f, type: 3}
+      - {fileID: 21300000, guid: a896198c1ec7423b9c72c1e73e16f1c3, type: 3}
+      - {fileID: 21300000, guid: 972de8180b8fd4a89a1d602dd26c11b3, type: 3}
+      - {fileID: 21300000, guid: 512e734d0cee46d885a014da5758b807, type: 3}
+      - {fileID: 21300000, guid: 5743ddc20e69403f86f5d4c61d47a7e6, type: 3}
+      - {fileID: 21300000, guid: 1f27cd8bc9d9486ba2cfd3e41fb31f7d, type: 3}
+      - {fileID: 21300000, guid: f82365984e5546e399b258ced5e5680e, type: 3}
+      - {fileID: 21300000, guid: a291a57c1a8f4841b5f3653d41e404ee, type: 3}
+      - {fileID: 21300000, guid: 418911a72bbf643e4b85a99f53ba9975, type: 3}
+      - {fileID: 21300000, guid: 4a907b569e2747519c057b6eaf73775d, type: 3}
+      - {fileID: 21300000, guid: 4a907b569e2747519c057b6eaf73775d, type: 3}
+      startTicks: 000000000300000005000000080000000a0000000d0000000e000000100000001100000015000000170000001a0000001c0000001f000000210000002300000024000000i
+      lengthTicks: 38
+      loop: 0
+    risingArt:
+      name: rise
+      frames:
+      - {fileID: 21300000, guid: 9ca9e9989c53a74d006b47c175df506f, type: 3}
+      - {fileID: 21300002, guid: 9ca9e9989c53a74d006b47c175df506f, type: 3}
+      - {fileID: 21300004, guid: 9ca9e9989c53a74d006b47c175df506f, type: 3}
+      - {fileID: 21300006, guid: 9ca9e9989c53a74d006b47c175df506f, type: 3}
+      - {fileID: 21300006, guid: 9ca9e9989c53a74d006b47c175df506f, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    fallingArt:
+      name: fall
+      frames:
+      - {fileID: 21300000, guid: ce01a2c588f712a9ea9c99487ebecb9a, type: 3}
+      - {fileID: 21300002, guid: ce01a2c588f712a9ea9c99487ebecb9a, type: 3}
+      - {fileID: 21300004, guid: ce01a2c588f712a9ea9c99487ebecb9a, type: 3}
+      - {fileID: 21300006, guid: ce01a2c588f712a9ea9c99487ebecb9a, type: 3}
+      - {fileID: 21300006, guid: ce01a2c588f712a9ea9c99487ebecb9a, type: 3}
+      startTicks: 0000000004000000080000000e00000013000000i
+      lengthTicks: 24
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 10
+      endTick: 11
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 12
+      endTick: 14
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 15
+      endTick: 17
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 18
+      endTick: 20
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 21
+      endTick: 23
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 24
+      endTick: 26
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 27
+      endTick: 29
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 37
+      hitstun: 16
+      pushPx: 10
+      flags: 0
+    - startTick: 30
+      endTick: 32
+      x0: 26
+      x1: 50
+      y0: 41
+      y1: 109
+      damage: 41
+      hitstun: 24
+      pushPx: 20
+      flags: 16
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 16
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 40
+  interactions:
+  - propId: ghe_nhua
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300002, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300004, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300006, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300008, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300010, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300012, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300014, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      - {fileID: 21300014, guid: 024f3672db2a590c8ff416991802fe48, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300002, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300004, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300006, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300008, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300010, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300012, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300014, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      - {fileID: 21300014, guid: 92c7af24f4e8561b889e1056628939da, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: vung
+      frames:
+      - {fileID: 21300000, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300002, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300004, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300006, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300008, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300010, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300012, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300014, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      - {fileID: 21300014, guid: 8a2beb7620d75b4cb0ea30c72fdc8751, type: 3}
+      startTicks: 0000000004000000070000000a0000000c00000010000000120000001500000018000000i
+      lengthTicks: 27
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300002, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300004, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300006, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300008, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300010, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300012, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300014, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      - {fileID: 21300014, guid: 8e5dd708247452518996eb589ce57823, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: chao_gang
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300002, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300004, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300006, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300008, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300010, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300012, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300014, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      - {fileID: 21300014, guid: 18e498b1d12c5d819a15fcbc3f535e30, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300002, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300004, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300006, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300008, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300010, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300012, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300014, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      - {fileID: 21300014, guid: 76bf3669ed9258f6ba3a65cfea8456ea, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: vung
+      frames:
+      - {fileID: 21300000, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300002, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300004, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300006, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300008, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300010, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300012, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300014, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      - {fileID: 21300014, guid: c459ae4d00ec5a75a0bbc7bc9083d41f, type: 3}
+      startTicks: 0000000004000000070000000a0000000c00000010000000120000001500000018000000i
+      lengthTicks: 27
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300002, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300004, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300006, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300008, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300010, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300012, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300014, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      - {fileID: 21300014, guid: 152704b4f2ec5bb1bd67eea84a91780d, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: ong_tuyp
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300002, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300004, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300006, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300008, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300010, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300012, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300014, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      - {fileID: 21300014, guid: ed1731c77b5d548ca6610fce9392044f, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300002, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300004, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300006, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300008, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300010, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300012, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300014, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      - {fileID: 21300014, guid: 80294e35c07e5a68b4ece1de85773214, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: vung
+      frames:
+      - {fileID: 21300000, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300002, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300004, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300006, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300008, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300010, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300012, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300014, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      - {fileID: 21300014, guid: 4cb4d1ddd18d5a8aa48a05044e1a9896, type: 3}
+      startTicks: 0000000004000000070000000a0000000c00000010000000120000001500000018000000i
+      lengthTicks: 27
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300002, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300004, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300006, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300008, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300010, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300012, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300014, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      - {fileID: 21300014, guid: 38dc6a2550865cb98a0a18f19507fc0e, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: choi_tre
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300002, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300004, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300006, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300008, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300010, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300012, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300014, guid: 802f04f0386156659d76631434b40492, type: 3}
+      - {fileID: 21300014, guid: 802f04f0386156659d76631434b40492, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300002, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300004, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300006, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300008, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300010, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300012, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300014, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      - {fileID: 21300014, guid: a2cf660c4acc54e9a1fbebe0d4af68c4, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: vung
+      frames:
+      - {fileID: 21300000, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300002, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300004, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300006, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300008, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300010, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300012, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300014, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      - {fileID: 21300014, guid: 572d9503fad657abbdf17157fd6bbc0e, type: 3}
+      startTicks: 0000000004000000070000000a0000000c00000010000000120000001500000018000000i
+      lengthTicks: 27
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300002, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300004, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300006, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300008, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300010, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300012, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300014, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      - {fileID: 21300014, guid: 4eb06af9339a5b409ac7c5bf26f68c42, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: chai_thuy_tinh
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300002, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300004, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300006, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300008, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300010, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300012, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300014, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      - {fileID: 21300014, guid: f76340fca0f85af1a1f8730b86f730ab, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300002, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300004, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300006, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300008, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300010, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300012, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300014, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      - {fileID: 21300014, guid: 81523bcd5dbc52afab8c04b65638e987, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300002, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300004, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300006, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300008, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300010, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300012, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300014, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      - {fileID: 21300014, guid: 61671430a4bf50a4b2451120488dfca8, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: gach
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300002, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300004, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300006, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300008, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300010, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300012, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300014, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      - {fileID: 21300014, guid: 0f40732ab3a85a02af0798aa314e133e, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300002, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300004, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300006, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300008, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300010, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300012, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300014, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      - {fileID: 21300014, guid: b8d932bf3af55899a7551f60963bdbd5, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300002, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300004, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300006, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300008, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300010, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300012, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300014, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      - {fileID: 21300014, guid: 01daf60b9e135586a2cd8dfc5b50061b, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: noi_pho
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300002, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300004, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300006, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300008, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300010, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300012, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300014, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      - {fileID: 21300014, guid: dadd0c5be66b5d1293422ec7a1435d14, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300002, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300004, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300006, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300008, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300010, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300012, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300014, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      - {fileID: 21300014, guid: 8c0099ca92f95ac99a854b80ac5d4f66, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300002, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300004, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300006, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300008, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300010, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300012, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300014, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      - {fileID: 21300014, guid: 39f92657a58a5fb4ad397075b574d31b, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: thung_phi
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300002, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300004, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300006, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300008, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300010, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300012, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300014, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      - {fileID: 21300014, guid: db0ae78cc1cd5f049125e64b10675e54, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300002, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300004, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300006, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300008, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300010, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300012, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300014, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      - {fileID: 21300014, guid: becf92b5ae6a523483f80485a4ccfa96, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300002, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300004, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300006, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300008, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300010, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300012, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300014, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      - {fileID: 21300014, guid: 2293dca62426566a923fc20ffd2ec1b9, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: binh_gas
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300002, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300004, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300006, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300008, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300010, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300012, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300014, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      - {fileID: 21300014, guid: 6d59c3519533537e918f53543c3df962, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300002, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300004, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300006, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300008, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300010, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300012, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300014, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      - {fileID: 21300014, guid: 2839074acc0d588295a8283c8ab723ba, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300002, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300004, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300006, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300008, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300010, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300012, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300014, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      - {fileID: 21300014, guid: f3db9df8a2e75d2cbb3059a2d298c391, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: thung_son
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300002, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300004, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300006, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300008, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300010, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300012, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300014, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      - {fileID: 21300014, guid: f7ff008ea3e05aa793f28b46d2ab5589, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300002, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300004, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300006, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300008, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300010, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300012, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300014, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      - {fileID: 21300014, guid: 25691fdd323b536680402bf7d807a613, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300002, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300004, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300006, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300008, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300010, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300012, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300014, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      - {fileID: 21300014, guid: 292546ea676c56758acf8444725c2543, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: bua_ta
+    pickup:
+      name: nhat
+      frames:
+      - {fileID: 21300000, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300002, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300004, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300006, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300008, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300010, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300012, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300014, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      - {fileID: 21300014, guid: 4f17c8059cdb564a8515a6119b909786, type: 3}
+      startTicks: 0000000004000000070000000b0000000e00000013000000160000001a0000001e000000i
+      lengthTicks: 34
+      loop: 0
+    hold:
+      name: cam
+      frames:
+      - {fileID: 21300000, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300002, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300004, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300006, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300008, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300010, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300012, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300014, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      - {fileID: 21300014, guid: bef90a0227ec5dd181f8fc872f944881, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    swing:
+      name: vung
+      frames:
+      - {fileID: 21300000, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300002, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300004, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300006, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300008, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300010, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300012, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300014, guid: df70397808305075947bcc8b695488da, type: 3}
+      - {fileID: 21300014, guid: df70397808305075947bcc8b695488da, type: 3}
+      startTicks: 0000000004000000070000000a0000000c00000010000000120000001500000018000000i
+      lengthTicks: 27
+      loop: 0
+    toss:
+      name: nem
+      frames:
+      - {fileID: 21300000, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300002, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300004, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300006, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300008, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300010, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300012, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300014, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      - {fileID: 21300014, guid: 6281e483b0bb5177a6304e5859406246, type: 3}
+      startTicks: 0000000004000000070000000b0000000d0000000f000000120000001500000019000000i
+      lengthTicks: 28
+      loop: 0
+    push:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  - propId: xe_may
+    pickup:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    hold:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    swing:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    toss:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    push:
+      name: day
+      frames:
+      - {fileID: 21300000, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300002, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300004, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300006, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300008, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300010, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300012, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300014, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      - {fileID: 21300014, guid: c71d25fc026c591abbee5b47786e9562, type: 3}
+      startTicks: 0000000004000000080000000c0000001000000014000000180000001c0000001f000000i
+      lengthTicks: 35
+      loop: 0
+    releaseFrame: 5
+    swingHitFrame: 4
+  moves:
+    idle:
+      name: idle_fight
+      frames:
+      - {fileID: 21300000, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300002, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300004, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300006, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300008, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300010, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300012, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300014, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      - {fileID: 21300014, guid: ba3475d4d8135f5a8b29d789d736732c, type: 3}
+      startTicks: 00000000080000001000000018000000200000002800000030000000380000003f000000i
+      lengthTicks: 71
+      loop: 1
+    walkFwd:
+      name: walk_fwd
+      frames:
+      - {fileID: 21300000, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300002, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300004, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300006, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300008, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300010, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300012, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300014, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      - {fileID: 21300014, guid: b98a53ea595451be95dc4a5680ea7008, type: 3}
+      startTicks: 00000000050000000a0000000f00000014000000190000001e0000002300000027000000i
+      lengthTicks: 44
+      loop: 1
+    walkBack:
+      name: walk_back
+      frames:
+      - {fileID: 21300000, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300002, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300004, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300006, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300008, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300010, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300012, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300014, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      - {fileID: 21300014, guid: 56714b6aaf8b50fbbc152f02608fe1ec, type: 3}
+      startTicks: 00000000060000000c00000011000000160000001c00000022000000270000002b000000i
+      lengthTicks: 48
+      loop: 1
+    run:
+      name: run
+      frames:
+      - {fileID: 21300000, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300002, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300004, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300006, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300008, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300010, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300012, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300014, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      - {fileID: 21300014, guid: 392a26416f8858058c6da323e7cebc8b, type: 3}
+      startTicks: 000000000300000006000000090000000c0000000f000000120000001500000017000000i
+      lengthTicks: 26
+      loop: 1
+    crouch:
+      name: crouch
+      frames:
+      - {fileID: 21300000, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300002, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300004, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300006, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300008, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300010, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300012, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      - {fileID: 21300012, guid: 3e8a9d89c5c15eaf8122c09a88464151, type: 3}
+      startTicks: 000000000300000006000000090000000c000000100000001400000019000000i
+      lengthTicks: 29
+      loop: 0
+    crouchHold:
+      name: crouch_hold
+      frames:
+      - {fileID: 21300000, guid: 8af5da7ff21c5be79565ce5e6a7fb8aa, type: 3}
+      - {fileID: 21300002, guid: 8af5da7ff21c5be79565ce5e6a7fb8aa, type: 3}
+      - {fileID: 21300004, guid: 8af5da7ff21c5be79565ce5e6a7fb8aa, type: 3}
+      - {fileID: 21300006, guid: 8af5da7ff21c5be79565ce5e6a7fb8aa, type: 3}
+      - {fileID: 21300006, guid: 8af5da7ff21c5be79565ce5e6a7fb8aa, type: 3}
+      startTicks: 000000000800000010000000180000001f000000i
+      lengthTicks: 39
+      loop: 1
+    jumpStart:
+      name: jump_start
+      frames:
+      - {fileID: 21300000, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      - {fileID: 21300002, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      - {fileID: 21300004, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      - {fileID: 21300006, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      - {fileID: 21300008, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      - {fileID: 21300008, guid: 1bdd177866735af6bd50eb169af24711, type: 3}
+      startTicks: 000000000300000006000000090000000c0000000d000000i
+      lengthTicks: 16
+      loop: 0
+    jumpAir:
+      name: jump_air
+      frames:
+      - {fileID: 21300000, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300002, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300004, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      startTicks: 00000000050000000a0000000f00000013000000i
+      lengthTicks: 24
+      loop: 1
+    jumpLand:
+      name: jump_land
+      frames:
+      - {fileID: 21300000, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300002, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300004, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300006, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300008, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300008, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      startTicks: 000000000300000006000000090000000c0000000e000000i
+      lengthTicks: 17
+      loop: 0
+    block:
+      name: block
+      frames:
+      - {fileID: 21300000, guid: ba6df20ad2c6500aab320ee17ad0ade8, type: 3}
+      - {fileID: 21300002, guid: ba6df20ad2c6500aab320ee17ad0ade8, type: 3}
+      - {fileID: 21300004, guid: ba6df20ad2c6500aab320ee17ad0ade8, type: 3}
+      - {fileID: 21300006, guid: ba6df20ad2c6500aab320ee17ad0ade8, type: 3}
+      - {fileID: 21300006, guid: ba6df20ad2c6500aab320ee17ad0ade8, type: 3}
+      startTicks: 000000000800000010000000180000001f000000i
+      lengthTicks: 39
+      loop: 1
+    blockHit:
+      name: block_hit
+      frames:
+      - {fileID: 21300000, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      - {fileID: 21300002, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      - {fileID: 21300004, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      - {fileID: 21300006, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      - {fileID: 21300008, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      - {fileID: 21300008, guid: bd5e4809afca55418d560d226c6cfa69, type: 3}
+      startTicks: 000000000200000004000000070000000a0000000c000000i
+      lengthTicks: 14
+      loop: 0
+    rollFwd:
+      name: roll_fwd
+      frames:
+      - {fileID: 21300000, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300002, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300004, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300006, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300008, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300010, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300012, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      - {fileID: 21300012, guid: 94fc014194b7509abdbc2bf67a39f19a, type: 3}
+      startTicks: 00000000020000000400000006000000080000000b0000000e00000010000000i
+      lengthTicks: 18
+      loop: 0
+    rollBack:
+      name: roll_back
+      frames:
+      - {fileID: 21300000, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300002, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300004, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300006, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300008, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300010, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300012, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      - {fileID: 21300012, guid: c5f6391c946f505c88b13b99f42e2a48, type: 3}
+      startTicks: 000000000300000006000000080000000a0000000d0000001000000012000000i
+      lengthTicks: 21
+      loop: 0
+    hitLight:
+      name: hit_light
+      frames:
+      - {fileID: 21300000, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      - {fileID: 21300002, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      - {fileID: 21300004, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      - {fileID: 21300006, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      - {fileID: 21300008, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      - {fileID: 21300008, guid: af5573a312dc575aa906d390c04bc7c1, type: 3}
+      startTicks: 000000000200000004000000080000000c0000000e000000i
+      lengthTicks: 17
+      loop: 0
+    hitHeavy:
+      name: hit_heavy
+      frames:
+      - {fileID: 21300000, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300002, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300004, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300006, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300008, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300010, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300012, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      - {fileID: 21300012, guid: 0feef559a07c5d36b2a9c9a5e3519918, type: 3}
+      startTicks: 000000000200000004000000080000000c000000100000001400000016000000i
+      lengthTicks: 25
+      loop: 0
+    stun:
+      name: stun
+      frames:
+      - {fileID: 21300000, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300002, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300004, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300006, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300008, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300010, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300012, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300014, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      - {fileID: 21300014, guid: 29d95247ad3456a39c5cacaef4212bc5, type: 3}
+      startTicks: 00000000060000000c00000012000000180000001e000000240000002a0000002f000000i
+      lengthTicks: 53
+      loop: 1
+    knockdown:
+      name: knockdown
+      frames:
+      - {fileID: 21300000, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      - {fileID: 21300002, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      - {fileID: 21300004, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      - {fileID: 21300006, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      - {fileID: 21300008, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      - {fileID: 21300008, guid: df67f610698a5bbaa3955f1c417d66c8, type: 3}
+      startTicks: 0000000004000000080000000c0000001000000017000000i
+      lengthTicks: 28
+      loop: 0
+    getup:
+      name: getup
+      frames:
+      - {fileID: 21300000, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300002, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300004, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300006, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300008, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300010, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300012, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      - {fileID: 21300012, guid: cdaec587cbb854ae99341a30c9a761d6, type: 3}
+      startTicks: 00000000050000000a0000000e00000012000000160000001a0000001c000000i
+      lengthTicks: 32
+      loop: 0
+    pulledFront:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    pulledBack:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    pulledRecover:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingPunch:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingKick:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    intro:
+      name: intro
+      frames:
+      - {fileID: 21300000, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      - {fileID: 21300002, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      - {fileID: 21300004, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      - {fileID: 21300006, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      - {fileID: 21300008, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      - {fileID: 21300008, guid: 300ebbe52a3758b0872491992e328ca1, type: 3}
+      startTicks: 000000000800000010000000180000002000000027000000i
+      lengthTicks: 47
+      loop: 0
+    win:
+      name: win
+      frames:
+      - {fileID: 21300000, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      - {fileID: 21300002, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      - {fileID: 21300004, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      - {fileID: 21300006, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      - {fileID: 21300008, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      - {fileID: 21300008, guid: 2e0432e60b735752b57b9684fee81e47, type: 3}
+      startTicks: 000000000800000010000000180000002000000027000000i
+      lengthTicks: 47
+      loop: 0
+    lose:
+      name: lose
+      frames:
+      - {fileID: 21300000, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      - {fileID: 21300002, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      - {fileID: 21300004, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      - {fileID: 21300006, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      - {fileID: 21300008, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      - {fileID: 21300008, guid: 1a3790988af7581d8e47e10a8efbd63f, type: 3}
+      startTicks: 000000000800000010000000180000002000000027000000i
+      lengthTicks: 47
+      loop: 0
+    taunt:
+      name: taunt
+      frames:
+      - {fileID: 21300000, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300002, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300004, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300006, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300008, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300010, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300012, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      - {fileID: 21300012, guid: db1749c713c058e28ffbad850b2d9cbe, type: 3}
+      startTicks: 0000000008000000100000001800000020000000280000003000000037000000i
+      lengthTicks: 63
+      loop: 0
+  normals:
+  - name: "\u0110\xE1nh nh\u1EB9 1"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: light_1
+      frames:
+      - {fileID: 21300000, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300002, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300004, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300006, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300008, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300010, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300012, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      - {fileID: 21300012, guid: 35975160fbbd5722908569f7dceff071, type: 3}
+      startTicks: 00000000020000000400000006000000080000000b0000000e00000010000000i
+      lengthTicks: 18
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 8
+      endTick: 13
+      x0: 22
+      x1: 43
+      y0: 44
+      y1: 60
+      damage: 25
+      hitstun: 14
+      pushPx: 6
+      flags: 0
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1nh nh\u1EB9 2"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: light_2
+      frames:
+      - {fileID: 21300000, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300002, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300004, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300006, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300008, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300010, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300012, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      - {fileID: 21300012, guid: 04062abba044537fac0eaeb750c0112c, type: 3}
+      startTicks: 000000000300000006000000080000000a0000000d0000001000000012000000i
+      lengthTicks: 21
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 2
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 6
+      endTick: 15
+      x0: 22
+      x1: 45
+      y0: 47
+      y1: 73
+      damage: 25
+      hitstun: 14
+      pushPx: 6
+      flags: 0
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1nh nh\u1EB9 3"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: light_3
+      frames:
+      - {fileID: 21300000, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300002, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300004, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300006, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300008, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300010, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300012, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      - {fileID: 21300012, guid: 24d6d8c1b8585aabaeb7d8ab49b740ff, type: 3}
+      startTicks: 000000000300000006000000080000000a0000000e0000001200000014000000i
+      lengthTicks: 23
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 6
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 10
+      endTick: 17
+      x0: 22
+      x1: 48
+      y0: 35
+      y1: 52
+      damage: 40
+      hitstun: 20
+      pushPx: 14
+      flags: 0
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1nh m\u1EA1nh"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: heavy
+      frames:
+      - {fileID: 21300000, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300002, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300004, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300006, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300008, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300010, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300012, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300014, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300016, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      - {fileID: 21300016, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
+      startTicks: 00000000050000000a0000000e00000012000000170000001c000000200000002400000026000000i
+      lengthTicks: 42
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 14
+    chainEndTick: 0
+    placeholderArt: 0
+    kind: 0
+    hits:
+    - startTick: 18
+      endTick: 27
+      x0: 22
+      x1: 50
+      y0: 34
+      y1: 52
+      damage: 80
+      hitstun: 26
+      pushPx: 20
+      flags: 32784
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1nh nh\u1EB9 tr\xEAn kh\xF4ng"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: air_light
+      frames:
+      - {fileID: 21300000, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300002, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300004, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      startTicks: 00000000050000000a0000000f00000013000000i
+      lengthTicks: 22
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 1
+    kind: 0
+    hits:
+    - startTick: 5
+      endTick: 12
+      x0: 8
+      x1: 44
+      y0: 24
+      y1: 80
+      damage: 30
+      hitstun: 14
+      pushPx: 8
+      flags: 4
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1nh m\u1EA1nh tr\xEAn kh\xF4ng"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: air_heavy
+      frames:
+      - {fileID: 21300000, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300002, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300004, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      startTicks: 00000000050000000a0000000f00000013000000i
+      lengthTicks: 28
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 1
+    kind: 0
+    hits:
+    - startTick: 9
+      endTick: 18
+      x0: 10
+      x1: 56
+      y0: 16
+      y1: 72
+      damage: 60
+      hitstun: 26
+      pushPx: 16
+      flags: 4
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "\u0110\xE1 b\u1ED5"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: air_dive
+      frames:
+      - {fileID: 21300000, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300002, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300004, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      - {fileID: 21300006, guid: f7b4bb41dd6852cfb2e303db9a0e7ce3, type: 3}
+      startTicks: 00000000050000000a0000000f00000013000000i
+      lengthTicks: 12
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 1
+    kind: 0
+    hits:
+    - startTick: 2
+      endTick: 600
+      x0: 0
+      x1: 40
+      y0: -12
+      y1: 40
+      damage: 50
+      hitstun: 20
+      pushPx: 10
+      flags: 4
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0
+  - name: "Ti\u1EBFp \u0111\u1EA5t sau \u0111\xE1 b\u1ED5"
+    input: 0
+    cost: 0
+    effect: 
+    clip:
+      name: air_dive_land
+      frames:
+      - {fileID: 21300000, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300002, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300004, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300006, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300008, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      - {fileID: 21300008, guid: 3c2fbe00371251a7b6baf45eaf1318b4, type: 3}
+      startTicks: 000000000300000006000000090000000c0000000e000000i
+      lengthTicks: 17
+      loop: 0
+    risingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    fallingArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    groundCastArt:
+      name: 
+      frames: []
+      startTicks: 
+      lengthTicks: 1
+      loop: 0
+    worldObject: {fileID: 0}
+    cableSegment: {fileID: 0}
+    cableGrips:
+      ground: []
+      rise: []
+      fall: []
+    dropsFromAbove: 0
+    chainStartTick: 0
+    chainEndTick: 0
+    placeholderArt: 1
+    kind: 0
+    hits: []
+    effectSpec:
+      enabled: 0
+      spawnTick: 0
+      offsetX: 40
+      offsetY: 50
+      speed: 0
+      vy: 0
+      gravity: 0
+      halfW: 10
+      halfH: 10
+      damage: 0
+      hitstun: 18
+      pushPx: 10
+      flags: 0
+      lifetime: 90
+      hitInterval: 0
+      emitInterval: 0
+      count: 1
+      spreadVy: 0
+      landFieldTicks: 0
+      atOpponent: 0
+      frames: []
+      drawScale: 1
+    dashSpeed: 0
+    jumpVelocity: 0
+    invulnTicks: 0
+    armor: 0
+    passThrough: 0
+    counterTicks: 0
+    counterPercent: 150
+    screenDarkTicks: 0

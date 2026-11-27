@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acefe08de4c584b7ab103d7408038f94, type: 3}
+  m_Name: Stage_congtruong
+  m_EditorClassIdentifier: Assembly-CSharp::LoanDau.Data.StageData
+  id: congtruong
+  displayName: "C\xF4ng Tr\u01B0\u1EDDng"
+  background: {fileID: 21300000, guid: 36a31af5a466d440eb2c01545ac50254, type: 3}
+  floorFromBottomPx: 60
+  sideMarginPx: 40
+  playerStartPx: 110
+  propLayoutVersion: 2
+  layout: "Nhi\u1EC1u t\u1EA7ng gi\xE0n gi\xE1o, s\xE0n kh\xF4ng \u0111\u1EC1u"
+  hazard: "C\u1EA7n c\u1EA9u th\u1EA3 v\u1EADt n\u1EB7ng xu\u1ED1ng v\u1ECB tr\xED c\xF3 b\xF3ng \u0111\u1ED5"
+  homeFighterId: bao
+  props:
+  - prop: {fileID: 11400000, guid: e1ea8a13d339c45618152a72d581c7ee, type: 2}
+    xPx: 0
+  - prop: {fileID: 11400000, guid: 6092b4b35b8484fef8d44bcd738b1f8d, type: 2}
+    xPx: -175
+  - prop: {fileID: 11400000, guid: 6092b4b35b8484fef8d44bcd738b1f8d, type: 2}
+    xPx: 175
+  - prop: {fileID: 11400000, guid: 4257ea80bd4e845f1817a21e89522fd1, type: 2}
+    xPx: -260
+  - prop: {fileID: 11400000, guid: 4257ea80bd4e845f1817a21e89522fd1, type: 2}
+    xPx: 260

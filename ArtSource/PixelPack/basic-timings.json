@@ -1,0 +1,472 @@
+{
+  "walk_fwd": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": true
+  },
+  "walk_back": {
+    "ticks": [
+      6,
+      6,
+      5,
+      5,
+      6,
+      6,
+      5,
+      5
+    ],
+    "loop": true
+  },
+  "run": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "loop": true
+  },
+  "jump": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      7,
+      7,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "jump_start": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      2
+    ],
+    "loop": false
+  },
+  "jump_air": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": true
+  },
+  "jump_land": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "crouch": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      6
+    ],
+    "loop": false
+  },
+  "crouch_hold": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": true
+  },
+  "punch": {
+    "ticks": [
+      3,
+      3,
+      2,
+      2,
+      3,
+      3,
+      2,
+      2,
+      2
+    ],
+    "loop": false
+  },
+  "kick": {
+    "ticks": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      2,
+      2,
+      3
+    ],
+    "loop": false
+  },
+  "idle_fight": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": true
+  },
+  "light_1": {
+    "ticks": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "light_2": {
+    "ticks": [
+      3,
+      3,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "light_3": {
+    "ticks": [
+      3,
+      3,
+      2,
+      2,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "heavy": {
+    "ticks": [
+      5,
+      5,
+      4,
+      4,
+      5,
+      5,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "block": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": true
+  },
+  "block_hit": {
+    "ticks": [
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "roll_fwd": {
+    "ticks": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "roll_back": {
+    "ticks": [
+      3,
+      3,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "loop": false
+  },
+  "hit_light": {
+    "ticks": [
+      2,
+      2,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "hit_heavy": {
+    "ticks": [
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "stun": {
+    "ticks": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "loop": true
+  },
+  "knockdown": {
+    "ticks": [
+      4,
+      4,
+      4,
+      4,
+      8
+    ],
+    "loop": false
+  },
+  "getup": {
+    "ticks": [
+      5,
+      5,
+      4,
+      4,
+      4,
+      4,
+      3
+    ],
+    "loop": false
+  },
+  "intro": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": false
+  },
+  "win": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": false
+  },
+  "lose": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": false
+  },
+  "taunt": {
+    "ticks": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "loop": false
+  },
+  "pickup": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "hold_small": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": true
+  },
+  "hold_large": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": true
+  },
+  "throw_small": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "throw_large": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "aim_throw": {
+    "ticks": [
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_blunt_1": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_blunt_2": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_long_1": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_long_2": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_long_3": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  },
+  "swing_heavy": {
+    "ticks": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "loop": false
+  }
+}

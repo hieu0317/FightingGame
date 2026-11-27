@@ -1,0 +1,49 @@
+# Unity – thư mục sinh tự động
+UnityProject/[Ll]ibrary/
+UnityProject/[Tt]emp/
+UnityProject/[Oo]bj/
+UnityProject/[Bb]uild/
+UnityProject/[Bb]uilds/
+UnityProject/[Ll]ogs/
+UnityProject/[Uu]ser[Ss]ettings/
+UnityProject/[Mm]emoryCaptures/
+UnityProject/[Rr]ecordings/
+
+# IDE / file sinh bởi Unity
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.vs/
+.vscode/
+.idea/
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+crashlytics-build.properties
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# File zip gốc của PixelPack (đã giải nén vào ArtSource/ + Assets/Art; bản v2 > 100 MB, GitHub không nhận)
+ArtSource/PixelPack/*.zip
+
+# Cấu hình MCP chứa đường dẫn máy cá nhân
+.mcp.json

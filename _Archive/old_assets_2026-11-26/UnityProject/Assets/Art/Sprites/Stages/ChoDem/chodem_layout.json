@@ -1,0 +1,146 @@
+{
+  "stage": "chodem",
+  "ppu": 256,
+  "tilt_deg": 12.0,
+  "arena": {
+    "x_min": -12.0,
+    "x_max": 12.0,
+    "floor_y": 0.0
+  },
+  "platforms": [
+    {
+      "name": "stage_chodem_maihien_01",
+      "x_min": -8.0,
+      "x_max": -4.0,
+      "top_y": 1.9563,
+      "one_way": true
+    },
+    {
+      "name": "stage_chodem_maihien_02",
+      "x_min": 4.0,
+      "x_max": 8.0,
+      "top_y": 1.9563,
+      "one_way": true
+    }
+  ],
+  "walls": [
+    {
+      "name": "stage_chodem_bien_l",
+      "x_min": -12.5,
+      "x_max": -11.5
+    },
+    {
+      "name": "stage_chodem_bien_r",
+      "x_min": 11.5,
+      "x_max": 12.5
+    }
+  ],
+  "player_spawns": [
+    {
+      "player": 1,
+      "x": -4.0,
+      "y": 0.0,
+      "facing": "right"
+    },
+    {
+      "player": 2,
+      "x": 4.0,
+      "y": 0.0,
+      "facing": "left"
+    }
+  ],
+  "prop_spawns": [
+    {
+      "name": "spawn_prop_01",
+      "x": -9.0,
+      "y": 0.0,
+      "size": "nho",
+      "default_prop": "prop_chai_thuy_tinh"
+    },
+    {
+      "name": "spawn_prop_02",
+      "x": 9.0,
+      "y": 0.0,
+      "size": "nho",
+      "default_prop": "prop_chai_thuy_tinh"
+    },
+    {
+      "name": "spawn_prop_03",
+      "x": -4.8,
+      "y": 0.0,
+      "size": "vua",
+      "default_prop": "prop_ghe_nhua"
+    },
+    {
+      "name": "spawn_prop_04",
+      "x": 4.8,
+      "y": 0.0,
+      "size": "vua",
+      "default_prop": "prop_ghe_nhua"
+    },
+    {
+      "name": "spawn_prop_05",
+      "x": -6.0,
+      "y": 1.9563,
+      "size": "vua",
+      "default_prop": "prop_ghe_nhua"
+    },
+    {
+      "name": "spawn_prop_06",
+      "x": 6.0,
+      "y": 1.9563,
+      "size": "vua",
+      "default_prop": "prop_ghe_nhua"
+    },
+    {
+      "name": "spawn_prop_07",
+      "x": -1.3,
+      "y": 0.0,
+      "size": "lon",
+      "default_prop": "prop_thung_phi"
+    },
+    {
+      "name": "spawn_prop_08",
+      "x": 1.3,
+      "y": 0.0,
+      "size": "lon",
+      "default_prop": "prop_thung_phi"
+    }
+  ],
+  "hazards": [
+    {
+      "name": "hazard_xemay_end",
+      "x": 15.0,
+      "y": 0.0,
+      "interval_s": 30
+    },
+    {
+      "name": "hazard_xemay_start",
+      "x": -15.0,
+      "y": 0.0,
+      "interval_s": 30
+    }
+  ],
+  "layers": [
+    {
+      "file": "chodem_bg.png",
+      "order": 0,
+      "parallax": 0.35
+    },
+    {
+      "file": "chodem_mid.png",
+      "order": 1,
+      "parallax": 0.12
+    },
+    {
+      "file": "chodem_play.png",
+      "order": 2,
+      "parallax": 0.0
+    },
+    {
+      "file": "chodem_fg.png",
+      "order": 3,
+      "parallax": -0.15
+    }
+  ]
+}
