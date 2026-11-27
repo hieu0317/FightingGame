@@ -28,6 +28,100 @@ namespace LoanDau.EditorTools
 
         public static void RunBatch() => EditorApplication.Exit(RunAndLog() ? 0 : 1);
 
+        /// <summary>Chạy 40 giây trên stage với mối nguy bật: phải hiện hình, phát sự kiện và làm mất máu. null = đạt.</summary>
+        /// <summary>Nhảy 2 lần lên bệ 100 px, đi ra mép thì rơi, ↓ + nhảy thì xuyên bệ xuống (Long và Bảo – người nhảy thấp nhất).</summary>
+        static string PlatformCheck(FighterData[] fighters, StageData baseStage)
+        {
+            const int S = FightSim.Sub, Top = PixelPackBuilder.PlatformLoweredMinPx;
+            var st = UnityEngine.Object.Instantiate(baseStage);
+            try
+            {
+                st.props = Array.Empty<StageData.PropSpawn>();
+                st.hazardKind = HazardKind.None;
+                st.platforms = new[] { new StageData.Platform { name = "test", x1Px = -200, x2Px = -20, topPx = Top } };
+                int half = Mathf.RoundToInt(st.background.bounds.size.x * MatchRunner.Ppu / 2f);
+                foreach (var id in new[] { "long", "bao" })
+                {
+                    var a = fighters.FirstOrDefault(f => f.id == id);
+                    var b = fighters.FirstOrDefault(f => f.id != id);
+                    if (!a || !b) return "thiếu nhân vật thử";
+                    var sim = new FightSim(a, b, st, half) { TrainingMode = true };
+                    sim.State.p0.x = -110 * S;
+                    sim.Simulate(new InputFrame(Buttons.Up), default);
+                    bool second = false;
+                    for (int i = 0; i < 180; i++)
+                    {
+                        var f = sim.State.p0;
+                        bool press = !second && f.vy <= 0 && !f.Grounded;          // nhảy lần 2 ở đỉnh cú nhảy đầu
+                        second |= press;
+                        sim.Simulate(new InputFrame(press ? Buttons.Up : Buttons.None), default);
+                    }
+                    var p = sim.State.p0;
+                    if (!second || p.floorY != Top * S || !p.Grounded)
+                        return $"{id}: nhảy 2 lần không đứng được lên bệ {Top} px (y = {p.y / S} px)";
+                    sim.Simulate(new InputFrame(Buttons.Down), default);
+                    sim.Simulate(new InputFrame(Buttons.Down | Buttons.Up), default);
+                    for (int i = 0; i < 90; i++) sim.Simulate(default, default);
+                    if (sim.State.p0.floorY != 0 || sim.State.p0.y != 0) return $"{id}: ↓ + nhảy không xuống khỏi bệ";
+                    // đứng lại trên bệ rồi đi ra mép phải (x2 = −20 px) → phải rơi xuống sàn
+                    sim.State.p0.y = sim.State.p0.floorY = Top * S;
+                    sim.State.p0.x = -40 * S;
+                    for (int i = 0; i < 90; i++) sim.Simulate(new InputFrame(Buttons.Right), default);
+                    if (sim.State.p0.floorY != 0 || sim.State.p0.y != 0) return $"{id}: đi ra khỏi mép bệ mà không rơi";
+                }
+                return null;
+            }
+            finally { UnityEngine.Object.DestroyImmediate(st); }
+        }
+
+        static string ChargeCheck(FighterData[] fighters, StageData s)
+        {
+            var a = fighters.FirstOrDefault(f => f.id == "long");
+            var b = fighters.FirstOrDefault(f => f.id == "bao");
+            if (!a || !b) return "thiếu nhân vật thử";
+            int half = Mathf.RoundToInt(s.background.bounds.size.x * MatchRunner.Ppu / 2f);
+            var sim = new FightSim(a, b, s, half);                     // không bật TrainingMode (chế độ tập luôn đầy năng lượng)
+            for (int i = 0; i < 10; i++) sim.Simulate(new InputFrame(Buttons.Guard), default);
+            int before = sim.State.p0.energy;
+            for (int i = 0; i < 120; i++) sim.Simulate(new InputFrame(Buttons.Guard | Buttons.Skill), default);
+            if (sim.State.p0.action != FighterAction.Charge) return $"giữ 2 giây mà hành động là {sim.State.p0.action}";
+            if (sim.State.p0.energy <= before + 20) return $"năng lượng chỉ tăng {before} → {sim.State.p0.energy}";
+            for (int i = 0; i < 60; i++) sim.Simulate(default, default);
+            if (sim.State.p0.action != FighterAction.Idle) return $"nhả nút 1 giây vẫn ở {sim.State.p0.action}";
+            return null;
+        }
+
+        static string HazardCheck(FighterData[] fighters, StageData s)
+        {
+            if (s.hazardKind == HazardKind.None) return "chưa gán loại mối nguy (chạy lại Dựng dữ liệu + scene)";
+            if (!MoveSet.Ok(s.hazardArt) || s.hazardArt.frames.Length < 8) return $"thiếu hình Hazards/{s.id}/hazard.anim (8 frame)";
+            var a = fighters.FirstOrDefault(f => f.id == "long");
+            var b = fighters.FirstOrDefault(f => f.id == "bao");
+            if (!a || !b) return "thiếu nhân vật thử";
+            int half = Mathf.RoundToInt(s.background.bounds.size.x * MatchRunner.Ppu / 2f);
+            var sim = new FightSim(a, b, s, half) { TrainingMode = true, HazardsEnabled = true };
+            const int S = FightSim.Sub;
+            bool strike = false, visible = false, rained = false;
+            for (int i = 0; i < 40 * FightSim.TickRate && !sim.RoundOver; i++)
+            {
+                // hai người đứng sát nhau giữa sân (chỗ đặt bếp / tủ điện); P1 đấm về phía tủ điện mỗi 1/3 giây
+                sim.State.p0.x = -20 * S;
+                sim.State.p1.x = 20 * S;
+                sim.State.p0.facing = 1;
+                var b0 = s.hazardKind == HazardKind.PowerBox && i % 20 == 0 ? Buttons.Light : Buttons.None;
+                sim.Simulate(new InputFrame(b0), default);
+                strike |= sim.Events.Any(e => e.kind == SimEventKind.HazardStrike);
+                visible |= sim.ViewHazard().frame >= 0;
+                rained |= sim.Raining;
+            }
+            bool hurt = sim.State.p0.hp < a.maxHp || sim.State.p1.hp < b.maxHp;
+            if (!visible) return "không có frame nào được vẽ";
+            if (!strike) return "không kích hoạt trong 40 giây";
+            if (!hurt) return "kích hoạt nhưng không ai mất máu";
+            if (s.hazardKind == HazardKind.PowerBox && !rained) return "không mưa";
+            return null;
+        }
+
         public static bool RunAndLog()
         {
             var (ok, report) = Run();
@@ -101,6 +195,39 @@ namespace LoanDau.EditorTools
                 Check(clearOfPlayers && bigCentered && inside,
                       $"{s.id}: bố cục {string.Join(", ", s.props.Select(x => $"{x.prop?.id}@{x.xPx}"))}, người chơi ±{s.playerStartPx}");
             }
+
+            // ---- mối nguy môi trường (GDD mục 5) + âm thanh
+            foreach (var s in stages)
+            {
+                string why = HazardCheck(fighters, s);
+                Check(why == null, $"{s.id}: mối nguy {s.hazardKind}" + (why == null ? " – có hình, kích hoạt theo chu kỳ, gây sát thương" : " – " + why));
+            }
+            // ---- gồng nộ (BasicActions/<nv>/rage_charge_* + CombatFX/rage_charge/<nv>)
+            Check(fighters.All(f => MoveSet.Ok(f.moves?.rageStart) && MoveSet.Ok(f.moves?.rageLoop) && MoveSet.Ok(f.moves?.rageEnd)
+                                    && MoveSet.Ok(f.moves?.rageFxLoop)),
+                  "6 nhân vật có clip gồng nộ (vào thế / giữ / thu) + hào quang");
+            {
+                string why = ChargeCheck(fighters, stages[0]);
+                Check(why == null, "Gồng nộ: giữ Đỡ + Kỹ năng tích năng lượng, nhả ra thì thu thế về đứng" + (why == null ? "" : " – " + why));
+            }
+            {
+                string why = PlatformCheck(fighters, stages[0]);
+                Check(why == null, "Double jump + bệ một chiều: nhảy 2 lần lên bệ, ↓ + nhảy xuống, đi ra mép thì rơi" + (why == null ? "" : " – " + why));
+            }
+            foreach (var s in stages.Where(x => x.id != "bep"))
+                Check(s.platforms.Length > 0 && s.platforms.Min(p => p.topPx) <= PixelPackBuilder.PlatformReachPx
+                      && s.platforms.Max(p => p.topPx) <= PixelPackBuilder.PlatformLoweredMaxPx,
+                      $"{s.id}: {s.platforms.Length} bệ, cao " + (s.platforms.Length > 0 ? $"{s.platforms.Min(p => p.topPx)}–{s.platforms.Max(p => p.topPx)} px" : "–")
+                      + (s.platforms.Any(p => p.art) ? " (đang hạ tạm, nền còn vẽ bệ ở chỗ cũ)" : ""));
+            Check(AssetDatabase.LoadAssetAtPath<FxLibrary>(PixelPackCombat.FxLibraryPath) is { } fxLib
+                  && fxLib.scaffoldContact.Length > 0 && fxLib.scaffoldBreak.Length > 0,
+                  "FxLibrary: giàn giáo chạm đất + đổ sụp (CombatFX/scaffold_impact)");
+
+            var audioLib = AssetDatabase.LoadAssetAtPath<AudioLibrary>($"{PixelPackBuilder.DataRoot}/AudioLibrary.asset");
+            Check(audioLib && audioLib.menuMusic && audioLib.stages.Length == stages.Length && audioLib.stages.All(a => a.music && a.ambience)
+                  && audioLib.hitLight.Length > 0 && audioLib.hitHeavy.Length > 0 && audioLib.explosion.Length > 0
+                  && audioLib.voices.Length == fighters.Length && audioLib.voices.All(v => v.lines.Length > 0),
+                  "AudioLibrary: nhạc menu + nhạc/nền từng stage, SFX va chạm/nổ, thoại 6 nhân vật");
 
             // ---- UI (Asset Bible mục 7)
             Check(fighters.All(f => f.portrait && f.superArt), "6 nhân vật có chân dung + banner tuyệt chiêu");

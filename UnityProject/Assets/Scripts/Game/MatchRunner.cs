@@ -23,6 +23,13 @@ namespace LoanDau.Game
         public StageData[] stages = Array.Empty<StageData>();
         [Tooltip("Hình lửa / điện / nổ / vũng (Assets/Data/FxLibrary.asset)")] public FxLibrary fx;
         [Tooltip("HUD + màn chọn nhân vật (UI Toolkit). Để trống = HUD đơn giản bằng OnGUI")] public GameUI ui;
+        [Tooltip("Nhạc / SFX / thoại (Assets/Data/AudioLibrary.asset). Trong Editor để trống = tự nạp từ Assets/Audio/PixelPack")]
+        public AudioLibrary audioLibrary;
+        [Tooltip("Mối nguy môi trường của stage (xe máy, cần cẩu, bếp lửa, tủ điện + mưa)")] public bool stageHazards = true;
+        MatchAudio matchAudio;
+        SpriteRenderer hazardRenderer, hazardWarnRenderer;
+        SpriteRenderer[] rainRenderers = Array.Empty<SpriteRenderer>();
+        Sprite hazardWarnSprite;
         [Tooltip("Bấm Play: mở màn chọn nhân vật trước (tắt để vào trận ngay với lựa chọn bên dưới)")] public bool startWithSelect = true;
         bool inSelect;
 
@@ -59,6 +66,7 @@ namespace LoanDau.Game
         readonly System.Random vfxRandom = new(1234);
         [Tooltip("Số tick đầu trận diễn clip vào trận, khoá điều khiển")] public int introTicks = 70;
         readonly SpriteRenderer[] fighterOverlays = new SpriteRenderer[2];
+        readonly SpriteRenderer[] rageAuras = new SpriteRenderer[2];
         static Sprite whiteSprite;
         [Tooltip("F4: hiện hộp nhận đòn (xanh), nhịp đánh đang hoạt động (đỏ), đạn/bẫy (cam)")]
         public bool showHitboxes;
@@ -72,6 +80,13 @@ namespace LoanDau.Game
         void Start()
         {
             if (!Playing) return;
+#if UNITY_EDITOR
+            if (!audioLibrary && fighters != null && stages != null)
+                audioLibrary = AudioLibrary.Populate(null,
+                    Array.ConvertAll(stages, s => s ? s.id : ""), Array.ConvertAll(fighters, f => f ? f.id : ""));
+#endif
+            if (audioLibrary) matchAudio = new MatchAudio(gameObject, audioLibrary);
+            if (ui && matchAudio != null) ui.PlaySelectSound = matchAudio.PlayCue;
             if (ui && startWithSelect) OpenSelect();
             else Rebuild();
         }
@@ -82,6 +97,7 @@ namespace LoanDau.Game
             inSelect = true;
             ClearRoot();
             sim = null;
+            matchAudio?.Menu();
             ui.ShowSelect(fighters, stages, p1Fighter, p2Fighter, (a, b, st) =>
             {
                 p1Fighter = a;
@@ -164,10 +180,15 @@ namespace LoanDau.Game
             stageBottomY = -stage.floorFromBottomPx / (float)Ppu;
             stageRenderer.transform.position = new Vector3(-b.center.x, stageBottomY - b.min.y, 0);
             stageHalfWidth = b.size.x / 2f;
+            // bệ được hạ thấp hơn chỗ vẽ trên nền: vẽ riêng sprite bệ ở chỗ đứng được (sau lưng nhân vật)
+            foreach (var pl in stage.platforms ?? Array.Empty<StageData.Platform>())
+                if (pl != null && pl.art)
+                    NewRenderer("Platform_" + pl.name, pl.art, -4).transform.position = ToWorld(pl.artXPx * FightSim.Sub, pl.artBottomPx * FightSim.Sub);
 
             sim = new FightSim(fighters[p1Fighter], fighters[p2Fighter], stage, Mathf.RoundToInt(stageHalfWidth * Ppu))
             {
                 TrainingMode = trainingMode,
+                HazardsEnabled = stageHazards && !preview,
             };
             for (int i = 0; i < 2; i++)
                 fighterRenderers[i] = NewRenderer($"P{i + 1}_{sim.Fighters[i].id}", sim.Fighters[i].idle, 10 + i);
@@ -183,6 +204,7 @@ namespace LoanDau.Game
             propOverlays = new SpriteRenderer[sim.Props.Length];
             for (int i = 0; i < propOverlays.Length; i++) propOverlays[i] = NewRenderer($"PropFx_{i}", null, 21);
             for (int i = 0; i < 2; i++) fighterOverlays[i] = NewRenderer($"P{i + 1}_Fx", null, 13);
+            for (int i = 0; i < 2; i++) rageAuras[i] = NewRenderer($"P{i + 1}_Rage", null, 12);
             effectViews = new System.Collections.Generic.List<SpriteRenderer>[FightSim.MaxEffects];
             for (int i = 0; i < effectViews.Length; i++) effectViews[i] = new System.Collections.Generic.List<SpriteRenderer>();
 
@@ -197,6 +219,7 @@ namespace LoanDau.Game
             darkRenderer = NewRenderer("ScreenDark", whiteSprite, -50);
             darkRenderer.color = new Color(0.02f, 0.02f, 0.06f, 0f);
             darkRenderer.transform.localScale = new Vector3(64, 32, 1);
+            BuildHazardViews(stage, preview);
 
             cam = preview ? null : Camera.main;           // xem trước: không đụng camera (tránh làm bẩn scene)
             if (cam)
@@ -208,6 +231,7 @@ namespace LoanDau.Game
             }
             accumulator = 0;
             if (!preview && ui) ui.ShowHud(sim, new[] { fighters[p1Fighter], fighters[p2Fighter] });
+            if (!preview) matchAudio?.StartMatch(sim, stage);
             Render();
         }
 
@@ -261,6 +285,7 @@ namespace LoanDau.Game
                     SpawnVfx(ev);
                     if (ui) ui.OnSimEvent(ev);
                 }
+                matchAudio?.OnTick(sim);
                 accumulator -= dt;
             }
             Render();
@@ -327,6 +352,7 @@ namespace LoanDau.Game
             }
 
             RenderEffects();
+            RenderHazard();
             RenderCables();
             RenderStatusOverlays();
             RenderOutlines();
@@ -401,6 +427,15 @@ namespace LoanDau.Game
                     r.enabled = k < need;
                     if (!r.enabled) continue;
                     if(worldSkill != null && worldSkill.worldObject && !e.field) {
+                        // giàn giáo chạm đất: diễn scaffold_contact rồi scaffold_break trong phần đời còn lại của hiệu ứng
+                        var hit = ScaffoldImpactFrame(worldSkill, e);
+                        if(hit) {
+                            r.sprite=hit;
+                            r.transform.localScale=Vector3.one*(s.halfW*2f/hit.rect.width);
+                            r.transform.position=ToWorld(e.x,e.y-s.halfH*FightSim.Sub);   // pivot ở đáy ảnh
+                            r.flipX=e.vx<0; r.color=Color.white;
+                            continue;
+                        }
                         r.sprite=worldSkill.worldObject;
                         float w=worldSkill.dropsFromAbove ? s.halfW*2f : Mathf.Clamp(s.halfW*2f,12,80);
                         r.transform.localScale=Vector3.one*(w/r.sprite.rect.width);
@@ -419,6 +454,107 @@ namespace LoanDau.Game
                     r.transform.position = p;
                     r.transform.localScale = Vector3.one * s.drawScale;
                     r.color = e.field ? new Color(1, 1, 1, 0.85f) : Color.white;
+                }
+            }
+        }
+
+        /// <summary>Frame va chạm của giàn giáo (CombatFX/scaffold_impact); null khi đang rơi hoặc không phải giàn giáo.</summary>
+        Sprite ScaffoldImpactFrame(SkillData skill, in EffectState e)
+        {
+            const int FallTicks = 12;                                  // FightSim.StepEffects: vật rơi 12 tick rồi chạm đất
+            if (!skill.dropsFromAbove || skill.worldObject.name != "scaffold" || fx == null) return null;
+            int c = fx.scaffoldContact.Length, b = fx.scaffoldBreak.Length;
+            int landed = e.age - FallTicks;
+            if (landed < 0 || c + b == 0) return null;
+            int per = Mathf.Max(1, (e.lifetime - FallTicks) / (c + b));
+            int n = landed / per;
+            if (n < c) return fx.scaffoldContact[n];
+            return b > 0 ? fx.scaffoldBreak[Mathf.Min(b - 1, n - c)] : fx.scaffoldContact[c - 1];
+        }
+
+        // ------------------------------------------------------------------ mối nguy môi trường (Hazards/<stage>/hazard.png)
+        void BuildHazardViews(StageData stage, bool preview)
+        {
+            var art = stage.hazardArt;
+            bool has = stage.hazardKind != HazardKind.None && MoveSet.Ok(art);
+            int order = stage.hazardKind switch
+            {
+                HazardKind.Motorbike => 12,   // xe chạy trước mặt nhân vật
+                HazardKind.Crane => 16,       // gạch rơi đè lên người
+                _ => -5,                      // bếp, tủ điện: đồ vật phía sau nhân vật
+            };
+            hazardRenderer = has ? NewRenderer("Hazard_" + stage.id, null, order) : null;
+            hazardWarnRenderer = null;
+            if (has && stage.hazardKind == HazardKind.Motorbike)
+            {
+                // biển báo "!" cắt từ frame 0 (vẽ cạnh xe) để hiện ở mép màn hình phía xe sắp lao vào
+                var f0 = art.frames[0];
+                var r = f0.rect;
+                hazardWarnSprite = stage.warningFrames?.Length > 0 ? stage.warningFrames[0]
+                    : Sprite.Create(f0.texture, new Rect(r.x + 166, r.y + 80, 44, 42), new Vector2(0.5f, 0f), Ppu);
+                hazardWarnRenderer = NewRenderer("HazardWarning", hazardWarnSprite, 40);
+                hazardWarnRenderer.enabled = false;
+            }
+            rainRenderers = Array.Empty<SpriteRenderer>();
+            if (stage.rainOverlay && stage.hazardKind == HazardKind.PowerBox && !preview)
+            {
+                rainRenderers = new SpriteRenderer[4 * 4];
+                for (int i = 0; i < rainRenderers.Length; i++)
+                {
+                    rainRenderers[i] = NewRenderer("Rain_" + i, stage.rainOverlay, 25);
+                    rainRenderers[i].enabled = false;
+                }
+            }
+        }
+
+        void RenderHazard()
+        {
+            var stage = stages[stageIndex];
+            if (hazardRenderer)
+            {
+                var v = sim.ViewHazard();
+                var art = stage.hazardArt;
+                hazardRenderer.enabled = v.frame >= 0 && v.frame < art.frames.Length;
+                if (hazardRenderer.enabled)
+                {
+                    hazardRenderer.sprite = art.frames[v.frame];
+                    hazardRenderer.flipX = v.dir < 0;
+                    // bếp / tủ điện: tâm vật nằm lệch phải pivot trong frame 224×176 → dời để tâm vật trùng vị trí mối nguy
+                    int offPx = stage.hazardKind switch { HazardKind.Burner => 30, HazardKind.PowerBox => 15, _ => 0 };
+                    hazardRenderer.transform.position = ToWorld(v.x - offPx * FightSim.Sub, 0);
+                }
+                if (hazardWarnRenderer)
+                {
+                    bool animated = stage.warningFrames?.Length > 1;
+                    hazardWarnRenderer.enabled = v.warn && (animated || (sim.State.tick / 8) % 2 == 0);
+                    if (v.warn && animated)
+                        hazardWarnRenderer.sprite = stage.warningFrames[(sim.State.tick / 8) % stage.warningFrames.Length];
+                    if (hazardWarnRenderer.enabled)
+                    {
+                        float camX = cam ? cam.transform.position.x : 0f;
+                        float x = camX + v.warnX * (RefWidth / 2f - 28) / Ppu;
+                        hazardWarnRenderer.transform.position = new Vector3(Mathf.Round(x * Ppu) / Ppu, 70f / Ppu, 0);
+                    }
+                }
+            }
+            if (rainRenderers.Length > 0 && cam)
+            {
+                float level = sim.RainLevel;
+                var rs = stage.rainOverlay.bounds.size;
+                float t = Time.time;
+                var c = cam.transform.position;
+                float ox = Mathf.Repeat(-t * 1.2f, rs.x), oy = Mathf.Repeat(-t * 6f, rs.y);
+                for (int i = 0; i < rainRenderers.Length; i++)
+                {
+                    var r = rainRenderers[i];
+                    r.enabled = level > 0.01f;
+                    if (!r.enabled) continue;
+                    int gx = i % 4, gy = i / 4;
+                    float x = c.x - RefWidth / 2f / Ppu + (gx - 1) * rs.x + ox;
+                    float y = c.y - RefHeight / 2f / Ppu + (gy - 1) * rs.y + oy;
+                    r.transform.position = new Vector3(Mathf.Round(x * Ppu) / Ppu, Mathf.Round(y * Ppu) / Ppu, 0)
+                                           + rs / 2f - r.sprite.bounds.center;
+                    r.color = new Color(1, 1, 1, 0.55f * level);
                 }
             }
         }
@@ -610,6 +746,25 @@ namespace LoanDau.Game
                 r.transform.localScale = Vector3.one * (f.shockFx > 0 ? 1.5f : 0.8f);
                 r.color = new Color(1, 1, 1, f.shockFx > 0 ? 0.9f : 0.75f);
             }
+            // hào quang gồng nộ: cùng khung + pivot với clip nhân vật → đặt đúng vị trí chân, lật theo hướng
+            for (int i = 0; i < 2; i++)
+            {
+                var f = sim.Fighter(i);
+                var r = rageAuras[i];
+                var m = sim.Fighters[i].moves;
+                SpriteClip clip = null;
+                int k = 0;
+                if (f.action == FighterAction.Charge && m != null)
+                {
+                    int phase = FightSim.ChargePhase(sim.Fighters[i], f, out k);
+                    clip = phase == 0 ? m.rageFxStart : phase == 1 ? m.rageFxLoop : m.rageFxEnd;
+                }
+                r.enabled = MoveSet.Ok(clip);
+                if (!r.enabled) continue;
+                r.sprite = clip.FrameAt(k);
+                r.flipX = f.facing < 0;
+                r.transform.position = ToWorld(f.x, f.y);
+            }
         }
 
         /// <summary>Tia do bẫy bắn ra dùng hình của chính bẫy (Cọc Tiếp Địa).</summary>
@@ -697,6 +852,12 @@ namespace LoanDau.Game
                         return f.actionTick < m.knockdown.lengthTicks ? Play(m.knockdown, f.actionTick) : Last(m.knockdown);
                     case FighterAction.Getup:
                         return Play(m.getup, f.actionTick);
+                    case FighterAction.Charge:
+                    {
+                        int phase = FightSim.ChargePhase(data, f, out int k);
+                        var c = phase == 0 ? m.rageStart : phase == 1 ? m.rageLoop : m.rageEnd;
+                        return Play(c, k) ?? (phase == 1 ? Play(m.crouchHold, t) : Play(m.idle, t));
+                    }
                 }
             }
             if (f.heldProp >= 0)
@@ -705,6 +866,8 @@ namespace LoanDau.Game
                 return data.FindInteraction(held.id)?.hold?.FrameAt(t);
             }
             if (!has) return data.idle;
+            if (!f.Grounded && f.doubleJumpUsed && MoveSet.Ok(m.doubleJump) && t - f.doubleJumpTick < m.doubleJump.lengthTicks)
+                return Play(m.doubleJump, t - f.doubleJumpTick);           // lộn người khi nhảy lần 2
             if (!f.Grounded) return f.vy > data.jumpVelocity / 2 ? Play(m.jumpStart, Mathf.Max(0, (data.jumpVelocity - f.vy) / FightSim.Gravity)) : Play(m.jumpAir, t);
             if (f.blocking) return f.crouching ? Play(m.crouchHold, t) : Play(m.block, t);
             if (f.crouching) return Play(m.crouchHold, t);
@@ -819,6 +982,7 @@ namespace LoanDau.Game
                 FighterAction.Blockstun => "đỡ",
                 FighterAction.Knockdown => "ngã",
                 FighterAction.Getup => "đứng dậy",
+                FighterAction.Charge => "gồng nộ",
                 _ => f.heldProp >= 0 ? "cầm " + sim.Props[sim.State.props[f.heldProp].dataIndex].displayName : f.blocking ? "thủ" : "",
             };
             var st = new GUIStyle(style) { alignment = right ? TextAnchor.UpperRight : TextAnchor.UpperLeft };

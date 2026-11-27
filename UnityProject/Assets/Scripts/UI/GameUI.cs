@@ -33,6 +33,7 @@ namespace LoanDau.UI
         Label clock, roundLabel, bannerTitle, bannerSub, hint;
         FightSim sim;
 
+        public Action<string> PlaySelectSound;
         public bool SelectOpen => select != null && select.style.display == DisplayStyle.Flex;
 
         void OnEnable()
@@ -419,6 +420,7 @@ namespace LoanDau.UI
 
         void OnLockChanged()
         {
+            PlaySelectSound?.Invoke("confirm");
             if (locked[0] && locked[1])
             {
                 // mặc định: sân nhà của P2 (người "đến thăm" sân của đối thủ)
@@ -460,6 +462,7 @@ namespace LoanDau.UI
 
         void Confirm()
         {
+            PlaySelectSound?.Invoke("stage_pick");
             select.style.display = DisplayStyle.None;
             onDone?.Invoke(cursor[0], cursor[1], stageCursor);
         }
@@ -472,9 +475,9 @@ namespace LoanDau.UI
             {
                 int dir = (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) ? 1 : 0)
                           - (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) ? 1 : 0);
-                if (dir != 0) { stageCursor = (stageCursor + dir + stages.Length) % stages.Length; Refresh(); }
+                if (dir != 0) { PlaySelectSound?.Invoke("move"); stageCursor = (stageCursor + dir + stages.Length) % stages.Length; Refresh(); }
                 if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Comma) || Input.GetKeyDown(KeyCode.Return)) { Confirm(); return; }
-                if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Period)) { locked[1] = false; Refresh(); }
+                if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Period)) { PlaySelectSound?.Invoke("cancel"); locked[1] = false; Refresh(); }
                 return;
             }
             Move(0, KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.J, KeyCode.K);
@@ -483,14 +486,14 @@ namespace LoanDau.UI
 
         void Move(int side, KeyCode left, KeyCode right, KeyCode up, KeyCode down, KeyCode ok, KeyCode back)
         {
-            if (Input.GetKeyDown(back) && locked[side]) { locked[side] = false; Refresh(); return; }
+            if (Input.GetKeyDown(back) && locked[side]) { PlaySelectSound?.Invoke("cancel"); locked[side] = false; Refresh(); return; }
             if (locked[side]) return;
             int n = fighters.Length, c = cursor[side];
             if (Input.GetKeyDown(left)) c = (c + n - 1) % n;
             if (Input.GetKeyDown(right)) c = (c + 1) % n;
             if (Input.GetKeyDown(up)) c = (c + n - 3) % n;
             if (Input.GetKeyDown(down)) c = (c + 3) % n;
-            if (c != cursor[side]) { cursor[side] = c; Refresh(); }
+            if (c != cursor[side]) { PlaySelectSound?.Invoke("move"); cursor[side] = c; Refresh(); }
             if (Input.GetKeyDown(ok)) { locked[side] = true; OnLockChanged(); }
         }
     }

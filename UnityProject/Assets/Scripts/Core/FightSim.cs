@@ -7,10 +7,16 @@ namespace LoanDau.Core
     {
         Idle, Walk, Jump, Skill, Pickup, Swing, Toss, Push,
         Hitstun, Blockstun, Knockdown, Getup, Roll,
+        Charge,     // gồng nộ: giữ Đỡ + Kỹ năng, đứng yên tích năng lượng, không đỡ được đòn
     }
 
     /// <summary>Sự kiện cho lớp hiển thị (tia lửa, chữ BỐP, mảnh vỡ…) – không thuộc trạng thái trận.</summary>
-    public enum SimEventKind : byte { HitLight, HitHeavy, Block, GuardBreak, Explosion, PropBreak, Land, Knockdown, KO, Super, RoundStart, TimeOver }
+    public enum SimEventKind : byte
+    {
+        HitLight, HitHeavy, Block, GuardBreak, Explosion, PropBreak, Land, Knockdown, KO, Super, RoundStart, TimeOver,
+        HazardWarn,     // mối nguy sắp xảy ra (biển báo xe máy, bóng đổ cần cẩu, bếp sắp bùng, tủ điện tích điện)
+        HazardStrike,   // mối nguy bắt đầu gây sát thương (xe lao vào sân, gạch chạm đất, lửa bùng, phóng điện)
+    }
 
     public struct SimEvent
     {
@@ -18,6 +24,7 @@ namespace LoanDau.Core
         public int x, y;          // đơn vị mô phỏng
         public int dir;           // hướng văng (+1 / -1)
         public int prop;          // PropBreak: chỉ số vật
+        public int actor;         // HitLight/HitHeavy: người dính đòn (0/1); -1 = không rõ
     }
 
     public enum PropPhase : byte { Floor, Held, Flying, Broken }
@@ -54,8 +61,13 @@ namespace LoanDau.Core
         public bool pulledForward;
         public bool reeled;               // đòn vừa dính là dây kéo: hết cuộn dây thì diễn clip loạng choạng (pulled_recover)
         public bool airAttackUsed;        // mỗi lần nhảy chỉ 1 đòn trên không
+        public int chargeEnd;             // gồng nộ: > 0 = đang thu thế, còn bấy nhiêu tick; 0 = còn đang giữ
+        public int floorY;                // mặt đang đứng: 0 = sàn, > 0 = mặt bệ (đơn vị mô phỏng)
+        public bool doubleJumpUsed;       // đã nhảy lần 2 trong lần bay này
+        public int doubleJumpTick;        // tick bật nhảy lần 2 (hiển thị clip double_jump)
+        public int dropTicks;             // ↓ + nhảy trên bệ: số tick còn đi xuyên bệ
         public Buttons prevButtons;
-        public bool Grounded => y == 0 && vy == 0;
+        public bool Grounded => y == floorY && vy == 0;
     }
 
     [Serializable]
@@ -119,6 +131,15 @@ namespace LoanDau.Core
         public int timer;                 // tick còn lại của hiệp
         public bool matchDecided;
         public int matchWinner;           // hợp lệ khi matchDecided: 0 / 1, -1 = hoà
+        // ---- mối nguy môi trường (GDD mục 5)
+        public int hazardTimer;           // tick tới lần kích hoạt kế tiếp (đang nghỉ)
+        public int hazardAge;             // tick đã diễn ra; -1 = đang nghỉ
+        public int hazardX, hazardDir;    // vị trí (đơn vị mô phỏng) / hướng chạy của xe máy
+        public int hazardHitMask;         // bit 0/1: người đã dính mối nguy lần này
+        public int hazardCount;           // số lần đã kích hoạt (đổi hướng xe / đổi mục tiêu cần cẩu)
+        public int hazardCooldown;        // tủ điện: thời gian tích điện lại sau khi phóng
+        public int rainTicks;             // > 0: đang mưa, sàn trơn
+        public int rainTimer;             // tick tới khi đổi trời
 
         public MatchState Clone()
         {
@@ -143,7 +164,7 @@ namespace LoanDau.Core
     /// Có: di chuyển, nhảy, đỡ (đứng/thấp), 30 chiêu với hitbox theo animation, đạn/bẫy/vùng, phản đòn,
     /// choáng/ngã/đứng dậy bất tử, vỡ thế đỡ, giảm sát thương combo, giới hạn tung, nhặt – vung – ném vật dụng.
     /// </summary>
-    public sealed class FightSim
+    public sealed partial class FightSim
     {
         public const int TickRate = 60;
         public const int Sub = 16;                    // 1 pixel = 16 đơn vị mô phỏng
@@ -180,8 +201,8 @@ namespace LoanDau.Core
         /// <summary>Sự kiện hiển thị của tick vừa chạy (xoá mỗi tick, không thuộc State).</summary>
         public readonly System.Collections.Generic.List<SimEvent> Events = new();
 
-        void Emit(SimEventKind k, int x, int y, int dir = 1, int prop = -1) =>
-            Events.Add(new SimEvent { kind = k, x = x, y = y, dir = dir, prop = prop });
+        void Emit(SimEventKind k, int x, int y, int dir = 1, int prop = -1, int actor = -1) =>
+            Events.Add(new SimEvent { kind = k, x = x, y = y, dir = dir, prop = prop, actor = actor });
 
         public bool InIntro => State.tick - State.roundStartTick < IntroTicks;
         /// <summary>Hiệp vừa kết thúc (K.O. / hết giờ) – khoá điều khiển, người thắng diễn clip thắng.</summary>
@@ -237,6 +258,11 @@ namespace LoanDau.Core
             initialProps = (PropState[])State.props.Clone();
             State.round = 1;
             State.timer = RoundTicks;
+            Platforms = BuildPlatforms(stage);
+            Hazard = stage.hazardKind;
+            HazardHomeX = Math.Clamp(stage.hazardXPx, -halfWidthPx, halfWidthPx) * Sub;
+            stageEdge = halfWidthPx * Sub;
+            ResetHazard();
         }
 
         readonly int startX;
@@ -257,6 +283,7 @@ namespace LoanDau.Core
             State.round++;
             State.roundStartTick = State.tick;
             State.timer = RoundTicks;
+            ResetHazard();
             Emit(SimEventKind.RoundStart, 0, 0, 1, State.round);
         }
 
@@ -313,6 +340,7 @@ namespace LoanDau.Core
             ResolveStrikes(0);
             ResolveStrikes(1);
             StepEffects();
+            if (HazardsEnabled && !InIntro && !RoundOver) StepHazard();
             for (int i = 0; i < State.props.Length; i++) StepProp(i);
             ElectrifyAura();
             if (State.darkTicks > 0) State.darkTicks--;
@@ -356,6 +384,7 @@ namespace LoanDau.Core
         bool OnSlipperyFloor(in FighterState f)
         {
             if (!f.Grounded) return false;
+            if (Raining) return true;                                  // mưa: cả sân trơn
             foreach (var e in State.effects)
                 if (e.active && (e.kind == EffectKind.Puddle || e.kind == EffectKind.ShockZone)
                     && Math.Abs(f.x - e.x) < SpecOf(e).halfW * Sub) return true;
@@ -419,6 +448,9 @@ namespace LoanDau.Core
                     f.actionTick++;
                     if (f.actionTick >= RollLength(data, f)) EndAction(ref f);
                     break;
+                case FighterAction.Charge:
+                    StepCharge(ref f, data, b);
+                    break;
                 case FighterAction.Skill:
                 case FighterAction.Pickup:
                 case FighterAction.Swing:
@@ -452,19 +484,27 @@ namespace LoanDau.Core
                 f.pullTicks--;
             }
             f.x += f.vx;
-            if (f.y > 0 || f.vy > 0)
+            if (f.dropTicks > 0) f.dropTicks--;
+            // bước ra khỏi mép bệ (đi bộ / bị đẩy / lướt): rơi xuống
+            if (f.floorY > 0 && f.y == f.floorY && f.vy == 0 && PlatformAt(f.x, f.floorY) < 0)
+                f.floorY = 0;
+            if (f.y > f.floorY || f.vy > 0)
             {
+                int prevY = f.y;
                 f.vy -= Gravity;
                 f.y += f.vy;
-                if (f.y <= 0)
+                int land = LandingHeight(f, prevY);
+                if (land >= 0)
                 {
-                    f.y = 0;
+                    f.y = land;
+                    f.floorY = land;
                     f.vy = 0;
+                    f.doubleJumpUsed = false;
                     if (f.action == FighterAction.Jump)
                     {
                         f.action = FighterAction.Idle;
                         f.landTick = State.tick;
-                        Emit(SimEventKind.Land, f.x, 0);
+                        Emit(SimEventKind.Land, f.x, f.y);
                     }
                     else if (IsAirNormal(f))
                     {
@@ -472,13 +512,13 @@ namespace LoanDau.Core
                         bool wasDive = f.skillIndex == FighterData.AirDive;
                         EndAction(ref f);
                         f.landTick = State.tick;
-                        Emit(wasDive ? SimEventKind.Knockdown : SimEventKind.Land, f.x, 0);
+                        Emit(wasDive ? SimEventKind.Knockdown : SimEventKind.Land, f.x, f.y);
                         if (wasDive) StartNormal(ref f, data, FighterData.DiveLand);
                     }
                     else if (f.action == FighterAction.Hitstun && (f.juggle > 0 || f.hp <= 0))
                     {
                         StartKnockdown(ref f);
-                        Emit(SimEventKind.Knockdown, f.x, 0);
+                        Emit(SimEventKind.Knockdown, f.x, f.y);
                     }
                     if (f.action != FighterAction.Skill) f.vx = 0;
                     if (f.Grounded) f.airAttackUsed = false;
@@ -493,6 +533,41 @@ namespace LoanDau.Core
                 p.y = f.y;
                 p.facing = f.facing;
             }
+        }
+
+        public const int ChargeGainInterval = 3;      // gồng nộ: +1 năng lượng mỗi 3 tick (đầy thanh ~5 giây)
+        public const int ChargeMinTicks = 12;         // giữ ít nhất bấy nhiêu tick (gồng hụt không huỷ ngay)
+
+        static int ClipTicks(SpriteClip c, int fallback) => MoveSet.Ok(c) ? c.lengthTicks : fallback;
+
+        /// <summary>Gồng nộ: vào thế (rageStart) → giữ (rageLoop) tới khi nhả nút / đầy thanh → thu thế (rageEnd).</summary>
+        static void StepCharge(ref FighterState f, FighterData data, Buttons b)
+        {
+            f.actionTick++;
+            f.vx = 0;
+            if (f.chargeEnd > 0)
+            {
+                if (--f.chargeEnd <= 0) EndAction(ref f);
+                return;
+            }
+            int start = ClipTicks(data.moves?.rageStart, 10);
+            if (f.actionTick > start && f.actionTick % ChargeGainInterval == 0) AddEnergy(ref f, 1);
+            bool holding = (b & Buttons.Guard) != 0 && (b & Buttons.Skill) != 0;
+            if ((!holding && f.actionTick >= ChargeMinTicks) || f.energy >= 100)
+                f.chargeEnd = ClipTicks(data.moves?.rageEnd, 10);
+        }
+
+        /// <summary>Hiển thị gồng nộ: 0 vào thế, 1 đang giữ, 2 thu thế; tick tính trong giai đoạn đó.</summary>
+        public static int ChargePhase(FighterData data, in FighterState f, out int tick)
+        {
+            if (f.chargeEnd > 0)
+            {
+                tick = ClipTicks(data.moves?.rageEnd, 10) - f.chargeEnd;
+                return 2;
+            }
+            int start = ClipTicks(data.moves?.rageStart, 10);
+            tick = f.actionTick < start ? f.actionTick : f.actionTick - start;
+            return f.actionTick < start ? 0 : 1;
         }
 
         static int RollLength(FighterData d, in FighterState f)
@@ -517,6 +592,12 @@ namespace LoanDau.Core
             {
                 StartAction(ref f, FighterAction.Swing);
                 f.actionProp = f.heldProp;
+            }
+            else if ((pressed & Buttons.Skill) != 0 && (b & Buttons.Guard) != 0 && f.Grounded && f.heldProp < 0 && f.energy < 100)
+            {
+                // Đỡ + Kỹ năng: gồng nộ (đứng yên tích năng lượng, bỏ thế đỡ)
+                StartAction(ref f, FighterAction.Charge);
+                f.chargeEnd = 0;
             }
             else if ((pressed & Buttons.Skill) != 0 && f.heldProp < 0)
             {
@@ -546,6 +627,18 @@ namespace LoanDau.Core
                 StartAction(ref f, FighterAction.Roll);
                 f.rollDir = pressedDir;
                 f.invuln = Math.Max(f.invuln, RollLength(data, f));
+            }
+            else if (!f.Grounded && (pressed & Buttons.Up) != 0 && TryDoubleJump(ref f, data, held, dir))
+            {
+                f.doubleJumpTick = State.tick;                           // nhảy lần 2 giữa không
+            }
+            else if (f.Grounded && f.floorY > 0 && (pressed & Buttons.Up) != 0 && (b & Buttons.Down) != 0)
+            {
+                // ↓ + nhảy trên bệ: rơi xuyên xuống
+                f.floorY = 0;
+                f.dropTicks = DropThroughTicks;
+                f.action = FighterAction.Jump;
+                f.vx = 0;
             }
             else if (f.Grounded)
             {
@@ -766,6 +859,7 @@ namespace LoanDau.Core
                 if ((win.flags & HitFlags.Reflect) != 0) ReflectInBox(a, box);
                 ApplyElements(box, win.flags, a);
                 StrikeExplosives(box, a);
+                StrikePowerBox(box);
                 if ((f.hitMask & (1 << w)) != 0) continue;
                 bool reach = (win.flags & HitFlags.Homing) != 0 || box.Overlaps(HurtBox(1 - a));
                 if (!reach) continue;
@@ -922,7 +1016,7 @@ namespace LoanDau.Core
             def.reeled = (flags & HitFlags.Pull) != 0;
             int hd = Fighters[defIdx].hurtHalfWidth;
             Emit(def.hitHeavy ? SimEventKind.HitHeavy : SimEventKind.HitLight,
-                 def.x - pushDir * hd * Sub, def.y + 60 * Sub, pushDir);
+                 def.x - pushDir * hd * Sub, def.y + 60 * Sub, pushDir, -1, defIdx);
 
             // vật đang cầm rơi khi trúng đòn mạnh hoặc đang cầm vật Lớn (GDD mục 4)
             if (def.heldProp >= 0)
@@ -1295,7 +1389,7 @@ namespace LoanDau.Core
         {
             ref var f = ref Fighter(idx);
             var data = Fighters[idx];
-            if (f.heldProp >= 0 || !f.Grounded) return -1;
+            if (f.heldProp >= 0 || !f.Grounded || f.floorY != 0) return -1;   // đứng trên bệ: vật nằm dưới sàn, không với tới
             int best = -1, bestDist = int.MaxValue;
             for (int i = 0; i < State.props.Length; i++)
             {
@@ -1448,7 +1542,7 @@ namespace LoanDau.Core
         {
             ref var a = ref State.p0;
             ref var b = ref State.p1;
-            if (!a.Grounded || !b.Grounded) return;
+            if (!a.Grounded || !b.Grounded || a.floorY != b.floorY) return;
             if (a.action == FighterAction.Knockdown || b.action == FighterAction.Knockdown) return;
             if (a.action == FighterAction.Roll || b.action == FighterAction.Roll) return;
             if (CurrentSkill(0)?.passThrough == true || CurrentSkill(1)?.passThrough == true) return;

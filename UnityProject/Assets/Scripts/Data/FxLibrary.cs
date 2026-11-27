@@ -20,5 +20,7 @@ namespace LoanDau.Data
         public Sprite[] shockRing = Array.Empty<Sprite>();
         public Sprite bop;   // chữ "BỐP!" – đòn mạnh
         public Sprite rac;   // chữ "RẮC!" – vật vỡ
+        public Sprite[] scaffoldContact = Array.Empty<Sprite>();   // giàn giáo (Sập Giàn Giáo) chạm đất
+        public Sprite[] scaffoldBreak = Array.Empty<Sprite>();     // giàn giáo đổ sụp, tan khi hết thời gian
     }
 }

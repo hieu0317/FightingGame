@@ -30,18 +30,18 @@ AnimationClip:
       value: {fileID: 21300006, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
     - time: 0.30000000
       value: {fileID: 21300008, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
-    - time: 0.38333333
+    - time: 0.36666667
       value: {fileID: 21300010, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
-    - time: 0.46666667
+    - time: 0.43333333
       value: {fileID: 21300012, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
-    - time: 0.53333333
+    - time: 0.51666667
       value: {fileID: 21300014, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
-    - time: 0.60000000
+    - time: 0.58333333
       value: {fileID: 21300016, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
     - time: 0.63333333
       value: {fileID: 21300016, guid: f66fd2ae3bc35d00a34aee232785f57b, type: 3}
     attribute: m_Sprite
-    path: 
+    path:
     classID: 212
     script: {fileID: 0}
     flags: 2

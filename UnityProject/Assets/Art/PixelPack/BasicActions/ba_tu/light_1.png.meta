@@ -20,9 +20,6 @@ TextureImporter:
   - first:
       213: 21300010
     second: light_1_05
-  - first:
-      213: 21300012
-    second: light_1_06
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -68,7 +65,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.041666668}
+  spritePivot: {x: 0.35714286, y: 0.09090909}
   spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -141,14 +138,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8eff094a2db551b5b48ae52b39156b94
+      spriteID: a535d4396f6d5975c1161dc057e22f94
       internalID: 21300000
       vertices: []
       indices: 
@@ -163,14 +160,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d53131877353522187959b1bdd45ca3b
+      spriteID: 61a6142c6400827041402735d365c4c1
       internalID: 21300002
       vertices: []
       indices: 
@@ -185,14 +182,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebea12bb09005e3a99003ec8b98c95ae
+      spriteID: 6558c15ddbb5feaaa6f8b2eab16f769c
       internalID: 21300004
       vertices: []
       indices: 
@@ -207,14 +204,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d3f603346485c8ab680cb45ca05caef
+      spriteID: 85d03ccbced76af9872377af169ea272
       internalID: 21300006
       vertices: []
       indices: 
@@ -229,14 +226,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81853f6227255193926ebab89366d79a
+      spriteID: f19091006d15123c259802eb7b385179
       internalID: 21300008
       vertices: []
       indices: 
@@ -251,37 +248,15 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e28440a15c1d5acabece5c0c01db474d
+      spriteID: b63f565bcf408de6994e43b794b4ec53
       internalID: 21300010
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: light_1_06
-      rect:
-        serializedVersion: 2
-        x: 1344
-        y: 0
-        width: 224
-        height: 176
-      alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8310bfa2c22f5363b4494cf2fce3bcde
-      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -306,7 +281,6 @@ TextureImporter:
       light_1_03: 21300006
       light_1_04: 21300008
       light_1_05: 21300010
-      light_1_06: 21300012
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

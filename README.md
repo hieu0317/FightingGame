@@ -16,7 +16,10 @@ Game đối kháng 2D pixel art, Unity 6000.6 + URP. Đồ hoạ lấy từ bộ
 | P2 | ← / → | ↑ | ↓ | , / . | ' | / (+ ↑ / ↓ / hướng tới) | . + / | ; |
 
 Đang cầm vật: J = vung vật. Đòn thường trúng có thể huỷ sang kỹ năng (bấm L ngay sau khi trúng).
+Gồng nộ: giữ Đỡ rồi giữ thêm Kỹ năng (P1 I + L, P2 ' + /) – đứng yên tích năng lượng (~5 giây đầy thanh), không đỡ được đòn; nhả ra thì thu thế.
 Trên không: J / K = đánh nhẹ / mạnh trên không (1 đòn mỗi lần nhảy, phải đỡ đứng); đang rơi + ↓ + K = đá bổ lao chéo xuống.
+Nhảy lần 2: bấm nhảy lần nữa giữa không (đổi được hướng, thêm 1 đòn trên không). Bệ (Chợ Đêm, Công Trường, Sân Thượng):
+nhảy 2 lần để lên, ↓ + nhảy để xuống, đi ra mép thì rơi.
 
 Đòn trên không đã có hình cho Khang, Linh, Mai; Long, Bảo, Bà Tư vẫn dùng hình tạm (yêu cầu vẽ: `ArtSource/PixelPack/SPEC_combo_va_tren_khong.md`).
 
@@ -94,6 +97,22 @@ Hình lửa/điện/nổ/vũng: `Assets/Data/FxLibrary.asset` (từ `PixelPack/I
   màn gốc 640×360 (phóng ×3 lên 1080p). Chân dung/banner/logo lọc Bilinear + mipmap (ảnh vẽ hiển thị thu nhỏ), còn lại Point.
 - File `PixelPack/UI/FightHUD.uxml`, `HUD.uss`, `CharacterSelect.uxml` giữ nguyên làm tham khảo (giao diện dựng bằng code theo `hud_preview.png`).
 
+## Âm thanh (`Scripts/Game/MatchAudio.cs`, `Assets/Data/AudioLibrary.asset`)
+- Nhạc menu ở màn chọn; nhạc + âm nền theo stage trong trận. SFX đánh nhẹ/mạnh, đỡ, vỡ thế đỡ, ngã, nổ, lửa (vật/người bốc cháy),
+  điện; vũ khí đánh trúng / vật vỡ phát tiếng theo vật liệu (kim loại, gỗ, nhựa, thuỷ tinh).
+- Thoại: vào trận, tung kỹ năng, tuyệt chiêu, bị K.O., thắng trận – chỉ số file `Voices/<nv>/0x.wav` chỉnh trong `AudioLibrary`.
+- Chỉ đọc sự kiện/trạng thái mô phỏng, không ảnh hưởng tính tất định. Trong Editor, chưa dựng lại dữ liệu thì tự nạp từ `Assets/Audio/PixelPack`.
+
+## Mối nguy môi trường (`Scripts/Core/FightSim.Hazards.cs`, GDD mục 5)
+Bật/tắt bằng `stageHazards` trên `Match` (self-test cũ chạy với mối nguy tắt). Hình: `PixelPack/Hazards/<stage>/hazard.png`.
+| Stage | Mối nguy |
+|---|---|
+| Chợ Đêm | Từ giây 20, mỗi 30 giây xe máy chạy ngang (đổi chiều mỗi lượt), biển "!" nhấp nháy ở mép màn hình 2 giây trước. 90 sát thương + ngã, không đỡ được – nhảy qua để né. Vật dễ vỡ / vật nổ trên đường bị phá |
+| Công Trường | Từ giây 12, mỗi 18 giây cần cẩu thả gạch vào chỗ người chơi đang đứng (luân phiên P1/P2), bóng đổ báo trước 1.5 giây. 120 sát thương + ngã, phá vật dễ vỡ / chất lỏng, kích nổ vật nổ |
+| Bếp Quán Lẩu | Bếp giữa sân: từ giây 8, mỗi 12 giây lửa nhen 1 giây rồi bùng 1.5 giây – 25 sát thương + bỏng mỗi 0.5 giây, đốt vật Dễ cháy trong 60 px (không kích nổ bình gas) |
+| Sân Thượng | Mưa 20 giây / tạnh 15 giây (bắt đầu giây 10): cả sân trơn. Tủ điện giữa sân bị đòn đánh trúng → phóng điện 60 sát thương + choáng trong 90 px (mưa: 130 px), biến vũng nước thành vùng giật; nghỉ 4 giây mới phóng lại |
+
 ## Chưa có (cần asset hoặc làm tiếp)
-- Hồi chiêu; tuyệt chiêu chưa có cảnh cắt chân dung; mối nguy môi trường của từng stage (xe máy chạy ngang, cần cẩu, bếp lửa, tủ điện).
+Danh sách asset cần thiết kế thêm + quy chuẩn: **`ArtSource/PixelPack/SPEC_asset_con_thieu.md`**.
+- Hồi chiêu; bệ nhảy (mái hiên, giàn giáo) – cần hình + toạ độ trước.
 - Sprite hư hỏng nằm sàn được thu nhỏ tự động từ `DamagedProps` (hơi mềm nét); nên vẽ bản nhỏ riêng nếu muốn sắc hơn.
