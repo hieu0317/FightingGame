@@ -71,8 +71,9 @@ namespace LoanDau.EditorTools
             var stages = BuildStages(catalog, props, fighters);
             var fx = PixelPackCombat.BuildFxLibrary();
             var (skin, panel) = BuildUi();
+            var audio = BuildAudio(stages, fighters);
             AssetDatabase.SaveAssets();
-            BuildScene(fighters, stages, fx, skin, panel);
+            BuildScene(fighters, stages, fx, skin, panel, audio);
             AssetDatabase.SaveAssets();
             Debug.Log($"[PixelPack] Dựng xong: {fighters.Count} nhân vật, {props.Count} vật dụng, {stages.Count} stage → {ScenePath}");
         }
@@ -142,7 +143,9 @@ namespace LoanDau.EditorTools
                 data.icon = AssetDatabase.LoadAssetAtPath<Sprite>($"{Pack}/Props/{id}.png");
                 // sprite nằm sàn đúng tỷ lệ (Tools/extract_floor_props.py); thiếu thì tạm dùng ảnh gốc và cảnh báo
                 data.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{FloorProps}/{id}.png");
-                data.damagedSprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{FloorProps}/{id}_damaged.png");
+                data.damagedSprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{Pack}/DamagedProps/{id}_damaged_floor.png");
+                if (!data.damagedSprite)
+                    data.damagedSprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{FloorProps}/{id}_damaged.png");
                 data.outline = AssetDatabase.LoadAssetAtPath<Sprite>($"{FloorProps}/{id}_outline.png");
                 data.debris = Enumerable.Range(0, 12)
                     .Select(i => AssetDatabase.LoadAssetAtPath<Sprite>($"{FloorProps}/{id}_debris_{i}.png")).Where(x => x).ToArray();
@@ -213,6 +216,8 @@ namespace LoanDau.EditorTools
                 data.superArt = AssetDatabase.LoadAssetAtPath<Sprite>($"{Pack}/UI/super_{id}.png");
                 // đòn thường J/K: clip từ BasicActions; giữ số liệu chiến đấu đã chỉnh tay
                 var normals = new List<SkillData>();
+                bool migrateCombo = data.normals?.FirstOrDefault(o => o.clip?.name == "light_1") is SkillData oldJab
+                                    && oldJab.chainEndTick == 0;
                 foreach (var (clipId, nName) in PixelPackCombat.NormalClips)
                 {
                     string dirB = $"{Pack}/BasicActions/{id}";
@@ -230,8 +235,10 @@ namespace LoanDau.EditorTools
                     }
                     var previous = data.normals?.FirstOrDefault(o => o.clip?.name == clipId);
                     CopyCombat(previous, n);
-                    if (previous?.placeholderArt == true && !placeholder)
+                    bool newCombo = migrateCombo && (clipId.StartsWith("light_") || clipId == "heavy");
+                    if ((previous?.placeholderArt == true || newCombo) && !placeholder)
                         PixelPackCombat.ReplacePlaceholderHitboxes(id, n, props);
+                    if (newCombo) n.chainStartTick = 0;
                     normals.Add(n);
                 }
                 data.normals = normals.ToArray();
@@ -396,6 +403,11 @@ namespace LoanDau.EditorTools
                 hitLight = C("hit_light", false), hitHeavy = C("hit_heavy", false), stun = C("stun", true),
                 knockdown = C("knockdown", false), getup = C("getup", false),
                 intro = C("intro", false), win = C("win", false), lose = C("lose", false), taunt = C("taunt", false),
+                doubleJump = C("double_jump", false),
+                rageStart = C("rage_charge_start", false), rageLoop = C("rage_charge_loop", true), rageEnd = C("rage_charge_end", false),
+                rageFxStart = ClipFromAnim($"{Pack}/CombatFX/rage_charge/{id}/rage_fx_start.anim", false),
+                rageFxLoop = ClipFromAnim($"{Pack}/CombatFX/rage_charge/{id}/rage_fx_loop.anim", true),
+                rageFxEnd = ClipFromAnim($"{Pack}/CombatFX/rage_charge/{id}/rage_fx_end.anim", false),
             };
         }
 
@@ -523,6 +535,25 @@ namespace LoanDau.EditorTools
                 data.background = bg;
                 data.layout = row.S("Bố cục");
                 data.hazard = row.S("Mối nguy môi trường");
+                // mối nguy: hình Hazards/<id>/hazard.png + logic theo loại (FightSim.Hazards.cs)
+                data.hazardKind = id switch
+                {
+                    "chodem" => HazardKind.Motorbike,
+                    "congtruong" => HazardKind.Crane,
+                    "bep" => HazardKind.Burner,
+                    "santhuong" => HazardKind.PowerBox,
+                    _ => HazardKind.None,
+                };
+                data.hazardArt = ClipFromAnim($"{Pack}/Hazards/{id}/hazard.anim", false);
+                if (data.hazardKind == HazardKind.Motorbike)
+                    data.warningFrames = AssetDatabase.LoadAllAssetsAtPath($"{Pack}/Hazards/{id}/warning.png")
+                        .OfType<Sprite>().OrderBy(sprite => sprite.name).ToArray();
+                data.rainOverlay = data.hazardKind == HazardKind.PowerBox
+                    ? AssetDatabase.LoadAssetAtPath<Sprite>($"{Pack}/StageModules/santhuong/rain.png") : null;
+                data.hazardXPx = 0;                           // bếp / tủ điện đặt giữa sân (bàn bếp ở giữa – GDD mục 5)
+                data.platforms = BuildPlatforms(id, data);
+                if (data.hazardKind != HazardKind.None && !MoveSet.Ok(data.hazardArt))
+                    Debug.LogWarning($"[PixelPack] Thiếu hình mối nguy Hazards/{id}/hazard.anim – stage {id} chạy mối nguy không có hình");
                 string home = row.Keys.FirstOrDefault(k => k.StartsWith("Nhân vật"));
                 data.homeFighterId = home != null ? FighterIdFromName(row.S(home)) : null;
                 if ((created || data.propLayoutVersion < PropLayoutVersion) && StageProps.TryGetValue(id, out var spawns))
@@ -547,8 +578,82 @@ namespace LoanDau.EditorTools
             return list;
         }
 
+        // ------------------------------------------------------------------ bệ nhảy
+        /// <summary>Bệ cao nhất mà mọi nhân vật nhảy 2 lần tới được (Bảo: ~115 px) – trừ lề để đáp chắc.</summary>
+        public const int PlatformReachPx = 105;
+        /// <summary>Bệ vẽ trên nền cao hơn tầm với → tạm hạ xuống: bệ thấp nhất ở độ cao này, các bệ khác giữ thứ tự cao thấp.</summary>
+        public const int PlatformLoweredMinPx = 100, PlatformLoweredMaxPx = 150;
+
+        /// <summary>
+        /// Đọc ArtSource/PixelPack/stage-platforms.json (toạ độ ảnh nền, gốc trên-trái). Bệ nào cao quá tầm nhảy 2 lần thì
+        /// hạ xuống và vẽ riêng sprite StageModules/&lt;stage&gt;/&lt;tên&gt;.png ở chỗ mới (bản trên ảnh nền vẫn còn
+        /// cho tới khi vẽ lại nền – xem SPEC_asset_con_thieu.md mục 6).
+        /// </summary>
+        static StageData.Platform[] BuildPlatforms(string id, StageData stage)
+        {
+            string path = Path.GetFullPath(Path.Combine(Application.dataPath, "../../ArtSource/PixelPack/stage-platforms.json"));
+            if (!File.Exists(path) || !stage.background) return Array.Empty<StageData.Platform>();
+            var root = (Dictionary<string, object>)MiniJson.Parse(File.ReadAllText(path));
+            var stagesJson = root.TryGetValue("stages", out var s) ? s as Dictionary<string, object> : null;
+            if (stagesJson == null || !stagesJson.TryGetValue(id, out var raw) || raw is not List<object> entries)
+                return Array.Empty<StageData.Platform>();
+            float bgW = stage.background.rect.width, bgH = stage.background.rect.height;
+            float floorFromTop = bgH - stage.floorFromBottomPx;
+            static int[] Ints(Dictionary<string, object> d, string key) =>
+                d.TryGetValue(key, out var v) && v is List<object> l ? l.Select(o => (int)Math.Round((double)o)).ToArray() : Array.Empty<int>();
+
+            var list = new List<(string name, int[] rect, int[] top, int height)>();
+            foreach (var e in entries.OfType<Dictionary<string, object>>())
+            {
+                var rect = Ints(e, "rect_xywh");
+                var top = Ints(e, "top_x1_x2_y");
+                if (rect.Length < 4 || top.Length < 3) continue;
+                list.Add((e.TryGetValue("sprite", out var n) ? n as string : "?", rect, top, Mathf.RoundToInt(floorFromTop - top[2])));
+            }
+            if (list.Count == 0) return Array.Empty<StageData.Platform>();
+            int minH = list.Min(p => p.height), maxH = list.Max(p => p.height);
+            bool lower = minH > PlatformReachPx;
+            float k = maxH > minH ? Mathf.Min(0.5f, (PlatformLoweredMaxPx - PlatformLoweredMinPx) / (float)(maxH - minH)) : 0f;
+            var result = new List<StageData.Platform>();
+            foreach (var (name, rect, top, height) in list)
+            {
+                var p = new StageData.Platform
+                {
+                    name = name,
+                    x1Px = Mathf.RoundToInt(top[0] - bgW / 2f),
+                    x2Px = Mathf.RoundToInt(top[1] - bgW / 2f),
+                    topPx = lower ? Mathf.RoundToInt(PlatformLoweredMinPx + (height - minH) * k) : height,
+                };
+                if (lower)
+                {
+                    p.art = AssetDatabase.LoadAssetAtPath<Sprite>($"{Pack}/StageModules/{id}/{name}.png");
+                    p.artXPx = Mathf.RoundToInt(rect[0] + rect[2] / 2f - bgW / 2f);
+                    p.artBottomPx = p.topPx - (rect[1] + rect[3] - top[2]);   // mặt bệ nằm trên đáy sprite (rect_y + h − top_y) px
+                }
+                result.Add(p);
+            }
+            if (lower)
+                Debug.LogWarning($"[PixelPack] {id}: bệ trên ảnh nền cao {minH}–{maxH} px, quá tầm nhảy 2 lần ({PlatformReachPx} px) " +
+                                 $"→ tạm hạ xuống {string.Join(", ", result.Select(p => p.name + " " + p.topPx + " px"))} và vẽ sprite bệ riêng. " +
+                                 "Vẽ lại nền với bệ thấp hơn để bỏ bản trùng (SPEC_asset_con_thieu.md mục 6).");
+            return result.ToArray();
+        }
+
+        // ------------------------------------------------------------------ âm thanh
+        static AudioLibrary BuildAudio(List<StageData> stages, List<FighterData> fighters)
+        {
+            var lib = LoadOrCreate<AudioLibrary>($"{DataRoot}/AudioLibrary.asset", out _);
+            AudioLibrary.Populate(lib, stages.Select(s => s.id).ToArray(), fighters.Select(f => f.id).ToArray());
+            EditorUtility.SetDirty(lib);
+            int voices = lib.voices.Sum(v => v.lines.Length);
+            Debug.Log($"[PixelPack] Âm thanh: nhạc menu {(lib.menuMusic ? "có" : "THIẾU")}, " +
+                      $"{lib.stages.Count(s => s.music)}/{lib.stages.Length} nhạc stage, {lib.stages.Count(s => s.ambience)} nền, " +
+                      $"{lib.hitLight.Length + lib.hitHeavy.Length + lib.explosion.Length + lib.fire.Length + lib.electric.Length} SFX chung, {voices} câu thoại");
+            return lib;
+        }
+
         // ------------------------------------------------------------------ scene
-        static void BuildScene(List<FighterData> fighters, List<StageData> stages, FxLibrary fx, UiSkin skin, PanelSettings panel)
+        static void BuildScene(List<FighterData> fighters, List<StageData> stages, FxLibrary fx, UiSkin skin, PanelSettings panel, AudioLibrary audio)
         {
             EnsureFolder("Assets/Scenes");
             var loaded = SceneManager.GetSceneByPath(ScenePath);
@@ -561,7 +666,10 @@ namespace LoanDau.EditorTools
                     runner.fighters = fighters.ToArray();
                     runner.stages = stages.ToArray();
                     runner.fx = fx;
+                    runner.audioLibrary = audio;
                     runner.ui = EnsureUi(loaded, skin, panel);
+                    var mainCam = loaded.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<Camera>(true)).FirstOrDefault();
+                    if (mainCam && !mainCam.GetComponent<AudioListener>()) mainCam.gameObject.AddComponent<AudioListener>();
                     EditorUtility.SetDirty(runner);
                     EditorSceneManager.MarkSceneDirty(loaded);
                     EditorSceneManager.SaveScene(loaded);
@@ -584,12 +692,14 @@ namespace LoanDau.EditorTools
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.07f, 0.07f, 0.12f);
             camGo.transform.position = new Vector3(0, 1.875f, -10);
+            camGo.AddComponent<AudioListener>();
 
             var runnerGo = new GameObject("Match");
             var r = runnerGo.AddComponent<MatchRunner>();
             r.fighters = fighters.ToArray();
             r.stages = stages.ToArray();
             r.fx = fx;
+            r.audioLibrary = audio;
             r.ui = EnsureUi(scene, skin, panel);
             r.p1Fighter = Math.Max(0, fighters.FindIndex(f => f.id == "long"));
             r.p2Fighter = Math.Max(0, fighters.FindIndex(f => f.id == "bao"));

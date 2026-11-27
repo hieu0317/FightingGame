@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: 21300012
     second: light_3_06
+  - first:
+      213: 21300014
+    second: light_3_07
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -68,7 +71,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.041666668}
+  spritePivot: {x: 0.35714286, y: 0.09090909}
   spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -141,14 +144,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a7c0bf7cc125b88ad5133765564bde3
+      spriteID: 6b3bff20360881d08ced9016730608d6
       internalID: 21300000
       vertices: []
       indices: 
@@ -163,14 +166,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 252c5d32795450adb4a2eced50f519a0
+      spriteID: 83e9a3f503a4f1dccbbd5a2339126026
       internalID: 21300002
       vertices: []
       indices: 
@@ -185,14 +188,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e6e5dac9698503c87bdad9fd9c4de4b
+      spriteID: 58ae371710b31780893ded2ef1046820
       internalID: 21300004
       vertices: []
       indices: 
@@ -207,14 +210,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06fb64905ef75ac5990d080e1db98463
+      spriteID: 71c9c3e567372b0a1bdd06b896f46063
       internalID: 21300006
       vertices: []
       indices: 
@@ -229,14 +232,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 47d260ec636656418ed6c90ce672dcdb
+      spriteID: e1eb5931b6647d1ccd15d44ec79bb047
       internalID: 21300008
       vertices: []
       indices: 
@@ -251,14 +254,14 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7cdefabe7d2f5d14866aaab78e6d2837
+      spriteID: 29ed3a2f7128374fd01e2ca83a0df960
       internalID: 21300010
       vertices: []
       indices: 
@@ -273,15 +276,37 @@ TextureImporter:
         width: 224
         height: 176
       alignment: 9
-      pivot: {x: 0.35714287, y: 0.09090909}
+      pivot: {x: 0.35714286, y: 0.09090909}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41dc44f9e1dd5159a91e0c7db00f945d
+      spriteID: 44ac5aa9ae8ca7967ad83e9ca080ae4c
       internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: light_3_07
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 0
+        width: 224
+        height: 176
+      alignment: 9
+      pivot: {x: 0.35714286, y: 0.09090909}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1ebf4bd6f4948513c38c787b6dd9ede
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -307,6 +332,7 @@ TextureImporter:
       light_3_04: 21300008
       light_3_05: 21300010
       light_3_06: 21300012
+      light_3_07: 21300014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

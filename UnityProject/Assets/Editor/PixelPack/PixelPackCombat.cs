@@ -230,7 +230,7 @@ namespace LoanDau.EditorTools
             Build(attack, spec, FindRuns(attack.clip, measured, front), front, props);
             foreach (var hit in attack.hits)
             {
-                hit.hitstun = attack.clip.name == "air_heavy" ? 26 : attack.clip.name == "air_dive" ? 20 : 14;
+                hit.hitstun = attack.clip.name is "heavy" or "air_heavy" ? 26 : attack.clip.name is "light_3" or "air_dive" ? 20 : 14;
                 if (attack.clip.name == "air_dive") hit.y0 = Math.Min(hit.y0, -12);
             }
         }
@@ -282,6 +282,7 @@ namespace LoanDau.EditorTools
             if (!sp || cf.frames == null) return null;
             // sprite đơn lẻ của PixelPack tên theo số frame: "0", "1", ...
             string name = sp.name;
+            if (name.Contains("_end_")) return null;
             int us = name.LastIndexOf('_');
             if (!int.TryParse(name, out int n) && !(us >= 0 && int.TryParse(name.Substring(us + 1), out n))) return null;
             return n >= 0 && n < cf.frames.Length ? cf.frames[n] : null;
@@ -393,6 +394,10 @@ namespace LoanDau.EditorTools
             lib.shockRing = Seq("shock_ring");
             lib.bop = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/PixelPack/CombatFX/bop.png");
             lib.rac = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/PixelPack/CombatFX/rac.png");
+            // dải frame một ảnh (scaffold_impact/*.png): xếp theo vị trí trên ảnh
+            Sprite[] Strip(string path) => AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>().OrderBy(s => s.rect.x).ToArray();
+            lib.scaffoldContact = Strip("Assets/Art/PixelPack/CombatFX/scaffold_impact/scaffold_contact.png");
+            lib.scaffoldBreak = Strip("Assets/Art/PixelPack/CombatFX/scaffold_impact/scaffold_break.png");
             EditorUtility.SetDirty(lib);
             return lib;
         }

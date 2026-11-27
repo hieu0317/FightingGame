@@ -48,7 +48,10 @@ AIR_ROWS = {
 }
 SKILL_TICKS = [4, 4, 6, 6]
 # sheet cast_<nv>: vẽ lúc đang bay → bản trên không (rise/fall); vẽ đứng đất → bản dưới đất (ground). Mặc định: ground.
-CAST_PHASES = {"long": ("rise", "fall"), "bao": ("ground",)}   # clip chiêu: engine kéo giãn theo độ dài chiêu gốc
+# cast_<nv>_air.png luôn là bản đang bay (dùng khi nhân vật đã có sheet đứng đất, vd Bảo) – xem SPEC_asset_con_thieu.md.
+CAST_PHASES = {"long": ("rise", "fall"), "bao": ("ground",),
+               "linh": ("rise", "fall"), "mai": ("rise", "fall"), "khang": ("rise", "fall"), "ba_tu": ("rise", "fall")}
+# clip chiêu: engine kéo giãn theo độ dài chiêu gốc
 
 
 # ------------------------------------------------------------------ gán nhãn / giãn vùng (thuần numpy, không cần scipy)
@@ -379,6 +382,10 @@ def sheet_rows(path, rows, fighter, neutral_clip=None):
     """→ list hàng, mỗi hàng 4 frame 224×176 đã chuẩn hoá.
     neutral_clip: frame đầu mọi hàng là dáng thủ của clip này (sheet chiêu) → khớp chiều cao trực tiếp;
     không có → dùng tỷ lệ của BasicSheets."""
+    with Image.open(path) as sheet:
+        if sheet.size == (4 * FW, rows * FH):
+            return [[sheet.crop((x * FW, y * FH, (x + 1) * FW, (y + 1) * FH)).convert("RGBA")
+                     for x in range(4)] for y in range(rows)]
     cells = sheet_cells(path, rows)
     if neutral_clip:
         ref = strip_frames(os.path.join(PACK, "BasicActions", fighter, neutral_clip + ".png"))
@@ -487,7 +494,10 @@ def main():
                     save_strip(os.path.join(PACK, "BasicActions", fighter), clip, frames, list(range(len(frames))), ticks)
                     done.append(f"{fighter}/{clip}")
         else:
-            phases = CAST_PHASES.get(fighter, ("ground",))
+            if fighter.endswith("_air"):
+                fighter, phases = fighter[:-4], ("rise", "fall")
+            else:
+                phases = CAST_PHASES.get(fighter, ("ground",))
             rows = sheet_rows(path, 5, fighter, "idle_fight" if phases == ("ground",) else "jump_air")
             for r, clip in enumerate(skill_clips[fighter][:5]):
                 for phase in phases:

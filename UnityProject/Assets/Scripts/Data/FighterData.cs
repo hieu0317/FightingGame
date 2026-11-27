@@ -75,6 +75,12 @@ namespace LoanDau.Data
         public SpriteClip hitLight, hitHeavy, stun, knockdown, getup;
         public SpriteClip pulledFront, pulledBack, pulledRecover, fallingPunch, fallingKick;
         public SpriteClip intro, win, lose, taunt;
+        [Tooltip("Gồng nộ (giữ Đỡ + bấm Kỹ năng): vào thế / giữ / thu – BasicActions/<nv>/rage_charge_*")]
+        public SpriteClip rageStart, rageLoop, rageEnd;
+        [Tooltip("Hào quang gồng nộ vẽ chồng lên người (cùng khung 224×176) – CombatFX/rage_charge/<nv>/rage_fx_*")]
+        public SpriteClip rageFxStart, rageFxLoop, rageFxEnd;
+        [Tooltip("Nhảy lần 2 giữa không (lộn người) – BasicActions/<nv>/double_jump; chưa có thì dùng jump_start")]
+        public SpriteClip doubleJump;
 
         public bool IsValid => idle != null && idle.IsValid;
         public static bool Ok(SpriteClip c) => c != null && c.IsValid;
@@ -96,6 +102,8 @@ namespace LoanDau.Data
         [Min(1)] public int maxHp = 1000;
         [Tooltip("1/16 pixel mỗi tick")] [Min(1)] public int walkSpeed = 32;
         [Tooltip("Vận tốc nhảy, 1/16 pixel mỗi tick")] [Min(1)] public int jumpVelocity = 120;
+        [Tooltip("Bấm nhảy lần nữa giữa không")] public bool canDoubleJump = true;
+        [Tooltip("Vận tốc nhảy lần 2; 0 = bằng jumpVelocity")] public int doubleJumpVelocity;
         public string passiveName;
         [TextArea] public string passiveEffect;
         [TextArea] public string propAffinity;
